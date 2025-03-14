@@ -1,0 +1,131 @@
+main {
+  background-color: white;
+}
+
+.contact-header {
+  background: linear-gradient(to left, #004e66, #004e66 50%, white 100%);
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: right;
+  padding: 3rem 12rem;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
+}
+
+.header h1 {
+  color: #fff;
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.contact-container {
+  background-color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.contact-wrapper {
+  margin: 10px;
+  display: flex;
+  gap: 40px;
+}
+
+.contact-info {
+  flex: 1;
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.contact-box h3 {
+  color: #004b69;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.info-item .icon {
+  margin-right: 15px;
+  font-size: 1.2rem;
+}
+
+.info-item p {
+  color: #666;
+  font-size: 1rem;
+}
+
+.contact-form {
+  flex: 2;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h3 {
+  color: #004b69;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #004b69;
+  outline: none;
+}
+
+.submit-btn {
+  background: #004b69;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: #003550;
+}
+
+.map-container {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .contact-header {
+    padding: 3rem 2rem;
+  }
+
+  .contact-wrapper {
+    flex-direction: column;
+  }
+
+  .contact-info,
+  .contact-form {
+    width: 100%;
+  }
+}
