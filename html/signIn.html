@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="mn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BIHDUB Auctions - Online bidding and selling platform">
+  <title>BIHDUB Auctions</title>
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/signIn.css">
+  <script src="../scripts/header.js" defer></script>
+  <script src="../scripts/signIn.js" defer></script>
+</head>
+
+<body>
+  <div class="overlay"></div>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="../assests/logo.png" alt="BidHub Logo">
+        </a>
+      </div>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="index.html">Нүүр</a>
+        <a href="auctions.html">Дуудлага худалдаа</a>
+        <a href="buySell.html">Авах, зарах</a>
+        <a href="aboutUs.html">Бидний тухай</a>
+        <a href="contactUs.html">Холбогдох</a>
+        <button class="search-btn" aria-label="Хайх">
+          <img src="../assests/searchIcon.png" class="search-icon" alt="Search Icon">
+        </button>
+        <a href="signIn.html" class="settings-btn" aria-label="Нэвтрэх">Нэвтрэх</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="signin-header">
+      <h1>Нэвтрэх / Бүртгүүлэх</h1>
+    </section>
+  
+    <section class="signin-container">
+      <div class="signin-form-container">
+        <div class="signin-tabs">
+          <button class="tab-btn active" data-tab="signin">Нэвтрэх</button>
+          <button class="tab-btn" data-tab="signup">Бүртгүүлэх</button>
+        </div>
+  
+        <div class="tab-content active" id="signin">
+          <form class="signin-form">
+            <div class="form-group">
+              <label for="email">И-мэйл</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Нууц үг</label>
+              <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-options">
+              <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Намайг сана</label>
+              </div>
+              <a href="#" class="forgot-password">Нууц үгээ мартсан?</a>
+            </div>
+            <button type="submit" class="signin-btn">Нэвтрэх</button>
+          </form>
+          <div class="social-signin">
+            <p>Эсвэл дараах сошиал хаягаар нэвтрэх</p>
+            <div class="social-buttons">
+              <button class="social-btn facebook">Facebook-ээр нэвтрэх</button>
+              <button class="social-btn google">Google-ээр нэвтрэх</button>
+            </div>
+          </div>
+        </div>
+  
+        <div class="tab-content" id="signup">
+          <form class="signup-form">
+            <div class="form-group">
+              <label for="fullname">Бүтэн нэр</label>
+              <input type="text" id="fullname" name="fullname" required>
+            </div>
+            <div class="form-group">
+              <label for="signup-email">И-мэйл</label>
+              <input type="email" id="signup-email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Утасны дугаар</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label for="signup-password">Нууц үг</label>
+              <input type="password" id="signup-password" name="password" required>
+            </div>
+            <div class="form-group">
+              <label for="confirm-password">Нууц үг баталгаажуулах</label>
+              <input type="password" id="confirm-password" name="confirm-password" required>
+            </div>
+            <div class="form-options">
+              <div class="terms">
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">Үйлчилгээний нөхцөлийг зөвшөөрч байна</label>
+              </div>
+            </div>
+            <button type="submit" class="signup-btn">Бүртгүүлэх</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Бидний тухай</h3>
+        <p>BIHDUB Auctions - Таны итгэлт дуудлага худалдааны платформ.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Холбоосууд</h3>
+        <ul>
+          <li><a href="#how-it-works">Хэрхэн ажилладаг</a></li>
+          <li><a href="#terms">Үйлчилгээний нөхцөл</a></li>
+          <li><a href="#privacy">Нууцлалын бодлого</a></li>
+          <li><a href="#contact">Холбоо барих</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Сошиал холбоосууд</h3>
+        <div class="social-links">
+          <a href="#facebook" aria-label="Facebook">Facebook</a>
+          <a href="#twitter" aria-label="Twitter">Twitter</a>
+          <a href="#instagram" aria-label="Instagram">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 BIHDUB Auctions. Бүх эрх хуулиар хамгаалагдсан.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
