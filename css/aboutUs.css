@@ -4,8 +4,9 @@ main {
 .about-us {
     background: linear-gradient(to left, #004e66, #004e66 50%, white 100%);
     color: white;
-    font-size: 120px;
+    font-size: 36px;
     font-weight: bold;
+    text-align: right;
     padding: 3rem 12rem;
     text-transform: uppercase;
     font-family: Arial, sans-serif;
