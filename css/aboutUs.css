@@ -1,0 +1,126 @@
+main {
+    background-color: white;
+  }
+.about-us {
+    background: linear-gradient(to left, #004e66, #004e66 50%, white 100%);
+    color: white;
+    font-size: 120px;
+    font-weight: bold;
+    padding: 3rem 12rem;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+.header h1 {
+    color: #fff;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    text-align: right;
+    border: 2px solid #004e66;
+    padding: 10px;
+    alignment: left;
+   
+}
+
+.header h4 {
+    color: #dcdcdc;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: right;
+    border: 2px solid #004e66;
+    padding: 10px;
+}
+/* 🖼️ Hero Image */
+.hero-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+/* 📖 Content Section */
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.text-section {
+    flex: 1;
+    min-width: 300px;
+}
+
+.text-section h2 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+.text-section p {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* 🌀 FAQ Section */
+.faq {
+    margin-top: 60px;
+    background: #eef1f6;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.faq-list {
+    list-style: none;
+}
+
+.faq-list li {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* 🎨 Image Styling */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .content {
+        flex-direction: column;
+    }
+
+    .faq {
+        text-align: center;
+    }
+}
