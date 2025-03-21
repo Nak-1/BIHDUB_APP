@@ -5,6 +5,17 @@ body {
     padding: 0;
 }
 
+.contact-header {
+    background: linear-gradient(to left, #004e66, #004e66 50%, white 100%);
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: right;
+    padding: 3rem 12rem;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
 .container {
     width: 80%;
     margin: auto;
@@ -43,7 +54,7 @@ body {
     flex: 1;
 }
 
-h1 {
+.details h1 {
     color: #000;
     font-size: 24px;
     margin-bottom: 5px;
