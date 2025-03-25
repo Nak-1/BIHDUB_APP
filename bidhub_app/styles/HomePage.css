@@ -1,0 +1,212 @@
+/* Enhanced section1 Section */
+.section1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 100vh;
+  padding: 2rem var(--spacing-lg);
+  background-color: var(--primary-color);
+}
+
+.section1-content {
+  max-width: 45%;
+}
+
+.section1 h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.section1 p {
+  font-size: 1.1rem;
+  margin: 1.5rem 0;
+  opacity: 0.9;
+}
+
+.section1-buttons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid var(--text-light);
+  color: var(--text-light);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.section1-image img {
+  width: 400px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.section1-image img:hover {
+  transform: translateY(-10px);
+}
+
+/* Enhanced section2 Section */
+.section2 {
+  padding: 5rem var(--spacing-lg);
+  background-color: white;
+}
+
+.section2-content h1 {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.auction-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.auction-card {
+  height: 40rem;
+  width: 20rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.auction-card:hover {
+  transform: translateY(-5px);
+}
+
+.auction-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.auction-details {
+  padding: 1.5rem;
+}
+
+.auction-title {
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.auction-price {
+  color: var(--accent-color);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.auction-time {
+  color: #666;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bid-button {
+  width: 100%;
+  padding: 0.8rem;
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.bid-button:hover {
+  background: #c0392b;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .section1 {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem var(--spacing-lg);
+  }
+
+  .section1-image img {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section1 {
+    padding: 1rem var(--spacing-lg);
+  }
+
+  .section1-content {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .section1 h1 {
+    font-size: 2.5rem;
+  }
+
+  .section1 p {
+    font-size: 1rem;
+  }
+
+  .section1-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .section1-image img {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section1 h1 {
+    font-size: 2rem;
+  }
+
+  .section1-image img {
+    max-width: 250px;
+  }
+}

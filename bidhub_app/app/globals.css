@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+:root {
+  --primary-color: #2c2c2c;
+  --accent-color: #e74c3c;
+  --text-light: #ecf0f1;
+  --spacing-lg: 5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+body {
+  background-color: white;
+  color: var(--text-light);
+  line-height: 1.6;
+}
