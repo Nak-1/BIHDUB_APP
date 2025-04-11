@@ -13,7 +13,7 @@ const orders = [
 const products = [
   {
     id: 1,
-    image: "https://via.placeholder.com/80", // Жинхэнэ зурагны URL-г солино уу
+    image: "",
     name: "Plant and Pots",
     yourBid: "$1,000",
     currentBid: "$800",
@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 2,
-    image: "https://via.placeholder.com/80",
+    image: "",
     name: "Bird in Forest",
     yourBid: "$1,200",
     currentBid: "$1,100",
@@ -29,7 +29,7 @@ const products = [
   },
   {
     id: 3,
-    image: "https://via.placeholder.com/80",
+    image: "",
     name: "Woman in Forest",
     yourBid: "$700",
     currentBid: "$700",
@@ -50,7 +50,7 @@ const ProfilePage = () => {
   return (
     <main>
       <section className="profile-header-banner">
-        <h1>Хувийн мэдээлэл</h1>
+        <h1>Хэрэглэгчийн мэдээлэл</h1>
       </section>
 
       <section className="profile-content">
