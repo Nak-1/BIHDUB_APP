@@ -1,10 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "../../styles/Auth.css";
 
 export default function Auth() {
   const [activeTab, setActiveTab] = useState("signin");
+  const router = useRouter();
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    router.push("/profile");
+  };
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    router.push("/profile");
+  };
 
   return (
     <main>
@@ -31,7 +43,7 @@ export default function Auth() {
 
           {activeTab === "signin" && (
             <div className="tab-content active">
-              <form className="signin-form">
+              <form className="signin-form" onSubmit={handleSignIn}>
                 <div className="form-group">
                   <label htmlFor="email">И-мэйл</label>
                   <input type="email" id="email" name="email" required />
@@ -61,7 +73,7 @@ export default function Auth() {
 
           {activeTab === "signup" && (
             <div className="tab-content active">
-              <form className="signup-form">
+              <form className="signup-form" onSubmit={handleSignUp}>
                 <div className="form-group">
                   <label htmlFor="fullname">Бүтэн нэр</label>
                   <input type="text" id="fullname" name="fullname" required />

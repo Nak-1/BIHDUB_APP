@@ -1,0 +1,28 @@
+{
+  "auctions": [
+    {
+      "id": 1,
+      "title": "Mona Lisa",
+      "price": 250000,
+      "image": "/assets/item1.png",
+      "timeLeft": "2 цаг",
+      "currentBids": 5
+    },
+    {
+      "id": 2,
+      "title": "Plans and Pots",
+      "price": 180000,
+      "image": "/assets/item2.png",
+      "timeLeft": "5 цаг",
+      "currentBids": 3
+    },
+    {
+      "id": 3,
+      "title": "Bird in Forest",
+      "price": 320000,
+      "image": "/assets/item3.png",
+      "timeLeft": "1 өдөр",
+      "currentBids": 8
+    }
+  ]
+}

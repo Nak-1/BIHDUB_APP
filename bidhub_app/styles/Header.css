@@ -59,7 +59,7 @@
 }
 
 .settings-btn:hover {
-  background-color: #334d8a;
+  opacity: 0.9;
 }
 
 .hamburger {
