@@ -13,7 +13,7 @@ const orders = [
 const products = [
   {
     id: 1,
-    image: "",
+    image: null,
     name: "Plant and Pots",
     yourBid: "$1,000",
     currentBid: "$800",
@@ -21,7 +21,7 @@ const products = [
   },
   {
     id: 2,
-    image: "",
+    image: null,
     name: "Bird in Forest",
     yourBid: "$1,200",
     currentBid: "$1,100",
@@ -29,7 +29,7 @@ const products = [
   },
   {
     id: 3,
-    image: "",
+    image: null,
     name: "Woman in Forest",
     yourBid: "$700",
     currentBid: "$700",
@@ -45,7 +45,7 @@ const transactions = [
 ];
 
 const ProfilePage = () => {
-  const [activeTab, setActiveTab] = useState("settings");
+  const [activeTab, setActiveTab] = useState("history");
 
   return (
     <main>
@@ -132,7 +132,11 @@ const ProfilePage = () => {
                   {products.map((product) => (
                     <tr key={product.id}>
                       <td className="product-info">
-                        <img src={product.image} alt={product.name} className="product-img" />
+                        {product.image ? (
+                          <img src={product.image} alt={product.name} className="product-img" />
+                        ) : (
+                          <div className="product-img-placeholder"></div>
+                        )}
                         <span>{product.name}</span>
                       </td>
                       <td>{product.yourBid}</td>

@@ -228,6 +228,14 @@
   border-radius: 5px;
 }
 
+.product-img-placeholder {
+  width: 50px;
+  height: 50px;
+  background-color: #f0f0f0;
+  display: inline-block;
+  margin-right: 10px;
+}
+
 /* wallet styles */
 .wallet-container {
   width: 100%;
