@@ -90,72 +90,10 @@
 }
 
 .auction-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  padding: 0 2rem;
-}
-
-.auction-card {
-  height: 40rem;
-  width: 20rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-.auction-card:hover {
-  transform: translateY(-5px);
-}
-
-.auction-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-}
-
-.auction-details {
-  padding: 1.5rem;
-}
-
-.auction-title {
-  color: #000;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.auction-price {
-  color: var(--accent-color);
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.auction-time {
-  color: #666;
-  font-size: 0.9rem;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.bid-button {
-  width: 100%;
-  padding: 0.8rem;
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  margin-top: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.bid-button:hover {
-  background: #c0392b;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 /* Responsive Design */

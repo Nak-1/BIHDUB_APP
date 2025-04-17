@@ -1,7 +1,14 @@
 import Image from "next/image";
-import "../styles/HomePage.css";
+import { useRouter } from "next/navigation";
+import "../styles/ItemCard.css";
 
 export default function ItemCard({ item }) {
+  const router = useRouter();
+
+  const navigateToItemInfo = (itemId) => {
+    router.push("/itemInfo");
+  };
+
   return( 
     <div className="auction-card">
       <Image
@@ -15,7 +22,7 @@ export default function ItemCard({ item }) {
         <h3 className="auction-title">{item.title}</h3>
         <div className="auction-price">₮ {item.price.toLocaleString()}</div>
         <div className="auction-time">Дуусах хугацаа: {item.timeLeft}</div>
-        <button className="bid-button">Дуудлага өгөх</button>
+        <button className="bid-button" onClick={() => navigateToItemInfo(item.id)}>Дуудлага өгөх</button>
       </div>
     </div>
   )

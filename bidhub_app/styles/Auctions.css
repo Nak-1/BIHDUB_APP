@@ -55,11 +55,10 @@
 
 .tab-btn:hover,
 .tab-btn:focus {
-  font-size: 19px;
+  transform: translateY(-2px);
   color: #c0392b;
 }
 
-/* Single sliding underline - removed for simplified approach */
 .tab-underline {
   position: absolute;
   bottom: -3px;
@@ -104,7 +103,26 @@
   box-shadow: 0 0 5px rgba(192, 57, 43, 0.3);
 }
 
-/* Responsive adjustments */
+.section2 {
+  padding: 5rem var(--spacing-lg);
+  background-color: white;
+}
+
+.section2-content h1 {
+  color: #000;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.auction-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
 @media (max-width: 768px) {
   .contact-header {
     padding: 2rem 4rem;
