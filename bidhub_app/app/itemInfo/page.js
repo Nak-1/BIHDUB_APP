@@ -126,7 +126,6 @@ export default function ItemInfo() {
             </tbody>
           </table>
         </div>
-        <h3>Бусад дуудлага худалдаа</h3>
       </section>
       <section className="section2">
         <div className="section2-content">
