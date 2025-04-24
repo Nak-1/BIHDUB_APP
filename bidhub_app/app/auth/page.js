@@ -10,11 +10,13 @@ export default function Auth() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
+    localStorage.setItem("isLoggedIn", "true");
     router.push("/profile");
   };
 
   const handleSignUp = (e) => {
     e.preventDefault();
+    localStorage.setItem("isLoggedIn", "true");
     router.push("/profile");
   };
 
