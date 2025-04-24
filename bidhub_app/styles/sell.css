@@ -1,0 +1,88 @@
+/* ───── Basics & Resets ───── */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #f3f6f9;
+  color: #1b2a41;
+}
+
+/* ───── Header ───── */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid #e0e6ed;
+}
+.site-logo   { font-weight: 700; letter-spacing: .5px; }
+.main-nav a  { margin: 0 12px; text-decoration: none; color: #1b2a41; font-size: 15px; }
+.main-nav a:hover { color: #0e6ba8; }
+.btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.login-btn { background: #27374d; color: #fff; }
+
+/* ───── Hero banner ───── */
+.hero {
+  padding: 60px 0;
+  background: linear-gradient(90deg, #a6c0d9 0%, #00476b 100%);
+  text-align: center;
+  color: #fff;
+}
+.hero h1 { margin: 0; font-size: 38px; font-weight: 800; }
+
+/* ───── Form Card ───── */
+.wrapper { display: flex; justify-content: center; padding: 60px 20px; }
+
+.auction-card {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0,0,0,.08);
+  padding: 32px;
+}
+
+.card-title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ───── Form Elements ───── */
+.form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
+.form-group span { margin-bottom: 6px; font-size: 14px; font-weight: 600; }
+input[type="text"],
+input[type="number"],
+input[type="file"],
+input[type="datetime-local"],
+textarea {
+  padding: 10px 14px;
+  border: 1px solid #c8d0da;
+  border-radius: 6px;
+  font-size: 15px;
+  resize: vertical;
+}
+input:focus,
+textarea:focus {
+  outline: 2px solid #0e6ba8;
+}
+.price-field input { max-width: 200px; }
+
+.submit-btn {
+  width: 100%;
+  background: #0e8a16;   /* ногоон */
+  color: #fff;
+  font-size: 16px;
+  transition: background .2s;
+}
+.submit-btn:hover { background: #0a6b11; }
