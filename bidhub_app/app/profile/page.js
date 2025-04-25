@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import DepositModal from "../../components/DepositModal";
 import "../../styles/Profile.css";
 
 const orders = [
@@ -46,6 +47,23 @@ const transactions = [
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("history");
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+  const [walletBalance, setWalletBalance] = useState(2450);
+
+  const handleDeposit = (depositData) => {
+    
+    setWalletBalance(prevBalance => prevBalance + depositData.amount);
+    
+    const newTransaction = {
+      id: transactions.length + 1,
+      date: new Date().toISOString().split('T')[0],
+      type: "Deposit",
+      amount: `$${depositData.amount}`,
+      status: "Completed"
+    };
+    
+    transactions.unshift(newTransaction);
+  };
 
   return (
     <main>
@@ -180,9 +198,14 @@ const ProfilePage = () => {
             <div className="wallet-container">
               <div className="wallet-balance-card">
                 <h3>Хэтэвчний үлдэгдэл</h3>
-                <div className="balance-amount">$2,450</div>
+                <div className="balance-amount">${walletBalance}</div>
                 <div className="wallet-actions">
-                  <button className="wallet-btn deposit">Мөнгө оруулах</button>
+                  <button 
+                    className="wallet-btn deposit"
+                    onClick={() => setIsDepositModalOpen(true)}
+                  >
+                    Мөнгө оруулах
+                  </button>
                   <button className="wallet-btn withdraw">Мөнгө гаргах</button>
                 </div>
               </div>
@@ -216,6 +239,12 @@ const ProfilePage = () => {
           ) : null
         }
       </section>
+
+      <DepositModal 
+        isOpen={isDepositModalOpen}
+        onClose={() => setIsDepositModalOpen(false)}
+        onDeposit={handleDeposit}
+      />
     </main>
   );
 };
