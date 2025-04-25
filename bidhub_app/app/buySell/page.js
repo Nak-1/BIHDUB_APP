@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import { FaBox, FaCreditCard, FaFileAlt, FaLink, FaShoppingBag } from "react-icons/fa";
 import section1 from "../../assests/section1.png";
 import "../../styles/BuySell.css";
+import { useRouter } from "next/navigation";
 
 export default function BuySell() {
+  const router = useRouter();
+
   return (
     <section className="buy-sell-section">
       <div className="auction-container">
@@ -22,11 +27,10 @@ export default function BuySell() {
             <div className="header-text">
               <h1>Авах, зарах</h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pulvinar
-                interdum enim a vestibulum, nunc cras. Gravida morbi sit sed egestas
-                cursus risus imperdiet bibendum nisi enim.
+              Бид танд найдвартай дуудлага худалдаанд цахимаар оролцох болон өөрийн бараагаа дуудлага худалдаанд зарах боломжийг олгоно
               </p>
-              <button className="cta-button">Эхлэх</button>
+              <button className="cta-button">Оролцох</button>
+              <button className="cta-button1" onClick={() => {router.push("/sell");}}>Үүсгэх</button>
             </div>
           </div>
         </div>
@@ -42,10 +46,9 @@ export default function BuySell() {
           <h2>Хэрхэн ажилладаг вэ?</h2>
           <p>
             <strong>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              дуудлага худалдаанд цахимаар оролцох, өөрийнхөө барааг цахимаар дуудага худалдаанд оруулах.
             </strong>{" "}
-            Pulvinar interdum enim a vestibulum, nunc cras. Gravida morbi sit sed
-            egestas cursus risus imperdiet bibendum nisi enim.
+            Бид танд найдвартай дуудлага худалдаанд цахимаар оролцох болон өөрийн бараагаа дуудлага худалдаанд зарах боломжийг олгоно
           </p>
         </div>
 
@@ -68,8 +71,8 @@ export default function BuySell() {
             <div className="icon">
               <FaShoppingBag />
             </div>
-            <h3>Тендер</h3>
-            <p>Сонгосон бараагаа тендер зарлах</p>
+            <h3>Дуудлага худалдаа</h3>
+            <p>Сонгосон бүтээгдэхүүнийхээ үнийг дуудах</p>
           </div>
           <div className="feature-item">
             <div className="icon">

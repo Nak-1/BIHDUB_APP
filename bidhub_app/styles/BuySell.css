@@ -26,6 +26,7 @@
   padding: 40px;
   position: relative;
   z-index: 2;
+  background: linear-gradient(to left, #004e66, #004e66 50%, #fff 100%);
 }
 
 .header-image-container {
@@ -58,6 +59,8 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-family: Roboto, Arial, sans-serif;
+  margin-left:  10px;
 }
 
 .header-text p {
@@ -78,6 +81,19 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(231, 76, 60, 0.3);
+}
+.cta-button1 {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.3);
+  margin-left:20px;
 }
 
 .cta-button:hover {
