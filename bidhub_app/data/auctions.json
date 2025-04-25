@@ -3,26 +3,143 @@
     {
       "id": 1,
       "title": "Mona Lisa",
+      "description": "A stunning replica of Leonardo da Vinci's masterpiece, meticulously crafted with attention to detail.",
       "price": 250000,
+      "startingPrice": 150000,
+      "currency": "₮",
       "image": "/assests/item1.png",
+      "additionalImages": [
+        "/assests/item1_detail1.png",
+        "/assests/item1_detail2.png"
+      ],
       "timeLeft": "2 цаг",
-      "currentBids": 5
+      "endDate": "2023-12-15T18:00:00Z",
+      "currentBids": 5,
+      "bidHistory": [
+        {"userId": 103, "amount": 250000, "time": "2023-12-15T14:30:00Z"},
+        {"userId": 107, "amount": 230000, "time": "2023-12-15T13:45:00Z"},
+        {"userId": 103, "amount": 210000, "time": "2023-12-15T12:20:00Z"},
+        {"userId": 115, "amount": 190000, "time": "2023-12-15T11:10:00Z"},
+        {"userId": 107, "amount": 170000, "time": "2023-12-15T10:05:00Z"}
+      ],
+      "seller": {
+        "id": 42,
+        "name": "Art Gallery Mongolia",
+        "rating": 4.8,
+        "verified": true
+      },
+      "category": "Paintings",
+      "condition": "Excellent",
+      "dimensions": "77cm x 53cm",
+      "shippingOptions": ["Pickup", "Delivery in Ulaanbaatar"],
+      "tags": ["art", "painting", "replica", "renaissance"]
     },
     {
       "id": 2,
-      "title": "Plans and Pots",
+      "title": "Plants and Pots",
+      "description": "Beautiful handcrafted ceramic pots with healthy indoor plants. Perfect for home or office decoration.",
       "price": 180000,
+      "startingPrice": 120000,
+      "currency": "₮",
       "image": "/assests/item2.png",
+      "additionalImages": [
+        "/assests/item2_detail1.png",
+        "/assests/item2_detail2.png"
+      ],
       "timeLeft": "5 цаг",
-      "currentBids": 3
+      "endDate": "2023-12-15T21:00:00Z",
+      "currentBids": 3,
+      "bidHistory": [
+        {"userId": 89, "amount": 180000, "time": "2023-12-15T13:20:00Z"},
+        {"userId": 76, "amount": 150000, "time": "2023-12-15T12:15:00Z"},
+        {"userId": 92, "amount": 135000, "time": "2023-12-15T10:45:00Z"}
+      ],
+      "seller": {
+        "id": 28,
+        "name": "Green Thumb Gardens",
+        "rating": 4.6,
+        "verified": true
+      },
+      "category": "Home & Garden",
+      "condition": "New",
+      "dimensions": "Set of 3 pots (various sizes)",
+      "shippingOptions": ["Pickup", "Nationwide Delivery"],
+      "tags": ["plants", "pottery", "ceramic", "indoor plants", "decoration"]
     },
     {
       "id": 3,
       "title": "Bird in Forest",
+      "description": "Original oil painting depicting a rare Mongolian bird species in its natural forest habitat. Signed by the artist.",
       "price": 320000,
+      "startingPrice": 200000,
+      "currency": "₮",
       "image": "/assests/item3.png",
+      "additionalImages": [
+        "/assests/item3_detail1.png",
+        "/assests/item3_detail2.png",
+        "/assests/item3_signature.png"
+      ],
       "timeLeft": "1 өдөр",
-      "currentBids": 8
+      "endDate": "2023-12-16T15:00:00Z",
+      "currentBids": 8,
+      "bidHistory": [
+        {"userId": 54, "amount": 320000, "time": "2023-12-15T14:50:00Z"},
+        {"userId": 67, "amount": 300000, "time": "2023-12-15T13:30:00Z"},
+        {"userId": 54, "amount": 280000, "time": "2023-12-15T12:45:00Z"},
+        {"userId": 39, "amount": 260000, "time": "2023-12-15T11:20:00Z"},
+        {"userId": 67, "amount": 240000, "time": "2023-12-15T10:15:00Z"},
+        {"userId": 54, "amount": 230000, "time": "2023-12-14T22:10:00Z"},
+        {"userId": 72, "amount": 220000, "time": "2023-12-14T18:30:00Z"},
+        {"userId": 39, "amount": 210000, "time": "2023-12-14T15:45:00Z"}
+      ],
+      "seller": {
+        "id": 15,
+        "name": "Mongolian Wildlife Art",
+        "rating": 4.9,
+        "verified": true
+      },
+      "category": "Original Artwork",
+      "condition": "New",
+      "dimensions": "90cm x 60cm",
+      "materials": "Oil on canvas",
+      "shippingOptions": ["Insured Delivery Only"],
+      "tags": ["art", "painting", "wildlife", "mongolian", "original", "bird"]
+    },
+    {
+      "id": 4,
+      "title": "Antique Mongolian Chest",
+      "description": "19th century hand-carved wooden chest with traditional Mongolian motifs. Excellent condition with original hardware.",
+      "price": 450000,
+      "startingPrice": 350000,
+      "currency": "₮",
+      "image": "/assests/item4.png",
+      "additionalImages": [
+        "/assests/item4_detail1.png",
+        "/assests/item4_detail2.png",
+        "/assests/item4_interior.png"
+      ],
+      "timeLeft": "3 өдөр",
+      "endDate": "2023-12-18T12:00:00Z",
+      "currentBids": 4,
+      "bidHistory": [
+        {"userId": 28, "amount": 450000, "time": "2023-12-14T20:15:00Z"},
+        {"userId": 43, "amount": 420000, "time": "2023-12-14T16:30:00Z"},
+        {"userId": 28, "amount": 390000, "time": "2023-12-13T19:45:00Z"},
+        {"userId": 51, "amount": 370000, "time": "2023-12-13T14:20:00Z"}
+      ],
+      "seller": {
+        "id": 7,
+        "name": "Heritage Antiques",
+        "rating": 4.7,
+        "verified": true
+      },
+      "category": "Antiques",
+      "condition": "Vintage - Excellent",
+      "dimensions": "120cm x 60cm x 70cm",
+      "age": "Circa 1880",
+      "provenance": "From a noble family in Arkhangai province",
+      "shippingOptions": ["Specialized Antique Delivery Only"],
+      "tags": ["antique", "furniture", "mongolian", "wooden", "chest", "heritage"]
     }
   ]
 }

@@ -6,12 +6,38 @@ import "../../styles/Auth.css";
 
 export default function Auth() {
   const [activeTab, setActiveTab] = useState("signin");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    localStorage.setItem("isLoggedIn", "true");
-    router.push("/profile");
+    setError("");
+    setLoading(true);
+    
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    
+    try {
+      const response = await fetch('/api/auth');
+      const data = await response.json();
+      
+      const user = data.users.find(user => user.email === email);
+      
+      if (!user) {
+        setError("Invalid email or password");
+        setLoading(false);
+        return;
+      }
+      
+      localStorage.setItem("isLoggedIn", "true");
+      
+      router.push("/profile");
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An error occurred. Please try again.");
+      setLoading(false);
+    }
   };
 
   const handleSignUp = (e) => {
@@ -48,10 +74,20 @@ export default function Auth() {
               <form className="signin-form" onSubmit={handleSignIn}>
                 <div className="form-group">
                   <label htmlFor="email">И-мэйл</label>
+                  {error && (
+                    <div className="error-message">
+                      {error}
+                    </div>
+                  )}
                   <input type="email" id="email" name="email" required />
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Нууц үг</label>
+                  {error && (
+                    <div className="error-message">
+                      {error}
+                    </div>
+                  )}
                   <input type="password" id="password" name="password" required />
                 </div>
                 <div className="form-options">
@@ -61,7 +97,9 @@ export default function Auth() {
                   </div>
                   <a href="#" className="forgot-password">Нууц үгээ мартсан?</a>
                 </div>
-                <button type="submit" className="signin-btn">Нэвтрэх</button>
+                <button type="submit" className="signin-btn" disabled={loading}>
+                  {loading ? "Уншиж байна..." : "Нэвтрэх"}
+                </button>
               </form>
               <div className="social-signin">
                 <p>Эсвэл дараах сошиал хаягаар нэвтрэх</p>
@@ -102,7 +140,9 @@ export default function Auth() {
                     <label htmlFor="terms">Үйлчилгээний нөхцөлийг зөвшөөрч байна</label>
                   </div>
                 </div>
-                <button type="submit" className="signup-btn">Бүртгүүлэх</button>
+                <button type="submit" className="signup-btn" disabled={loading}>
+                  {loading ? "Бүртгэж байна..." : "Бүртгүүлэх"}
+                </button>
               </form>
             </div>
           )}

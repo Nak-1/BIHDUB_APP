@@ -1,0 +1,319 @@
+{
+  "users": [
+    {
+      "id": 7,
+      "username": "john",
+      "name": "Heritage Antiques",
+      "email": "john@gmail.com",
+      "phone": "+976-11-123456",
+      "avatar": "/assets/users/user7.png",
+      "role": "seller",
+      "verified": true,
+      "rating": 4.7,
+      "joinDate": "2020-03-15T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Specializing in authentic Mongolian antiques and historical artifacts with over 20 years of experience.",
+      "socialMedia": {
+        "facebook": "heritageantiquesmn",
+        "instagram": "heritage_antiques_mongolia"
+      },
+      "itemsSold": 87,
+      "itemsBought": 12,
+      "favoriteCategories": ["Antiques", "Historical Items", "Cultural Artifacts"]
+    },
+    {
+      "id": 15,
+      "username": "wildlife_art",
+      "name": "Mongolian Wildlife Art",
+      "email": "info@wildlifeart.mn",
+      "phone": "+976-11-234567",
+      "avatar": "/assets/users/user15.png",
+      "role": "seller",
+      "verified": true,
+      "rating": 4.9,
+      "joinDate": "2019-07-22T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Collective of Mongolian artists dedicated to capturing the beauty of Mongolia's wildlife and landscapes.",
+      "socialMedia": {
+        "instagram": "mongolian_wildlife_art",
+        "twitter": "MongolianWildlifeArt"
+      },
+      "itemsSold": 124,
+      "itemsBought": 8,
+      "favoriteCategories": ["Original Artwork", "Paintings", "Wildlife Art"]
+    },
+    {
+      "id": 28,
+      "username": "greenthumb",
+      "name": "Green Thumb Gardens",
+      "email": "hello@greenthumb.mn",
+      "phone": "+976-11-345678",
+      "avatar": "/assets/users/user28.png",
+      "role": "both",
+      "verified": true,
+      "rating": 4.6,
+      "joinDate": "2021-04-10T00:00:00Z",
+      "location": "Darkhan, Mongolia",
+      "bio": "Providing beautiful plants and handcrafted pottery to bring nature into your home.",
+      "socialMedia": {
+        "facebook": "greenthumbgardens",
+        "instagram": "green_thumb_mongolia"
+      },
+      "itemsSold": 56,
+      "itemsBought": 43,
+      "favoriteCategories": ["Home & Garden", "Pottery", "Plants"]
+    },
+    {
+      "id": 39,
+      "username": "art_collector42",
+      "name": "Batbayar Tserenpil",
+      "email": "batbayar.t@example.com",
+      "phone": "+976-99-123456",
+      "avatar": "/assets/users/user39.png",
+      "role": "buyer",
+      "verified": true,
+      "rating": 4.8,
+      "joinDate": "2020-11-05T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Passionate art collector focusing on contemporary Mongolian artists.",
+      "socialMedia": {
+        "instagram": "mongolian_art_collector"
+      },
+      "itemsSold": 3,
+      "itemsBought": 67,
+      "favoriteCategories": ["Original Artwork", "Paintings", "Sculptures"]
+    },
+    {
+      "id": 42,
+      "username": "artgallery_mongolia",
+      "name": "Art Gallery Mongolia",
+      "email": "contact@artgallerymongolia.mn",
+      "phone": "+976-11-456789",
+      "avatar": "/assets/users/user42.png",
+      "role": "seller",
+      "verified": true,
+      "rating": 4.8,
+      "joinDate": "2018-09-30T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Premier art gallery showcasing both traditional and contemporary Mongolian art.",
+      "socialMedia": {
+        "facebook": "ArtGalleryMongolia",
+        "instagram": "artgallery_mongolia",
+        "twitter": "ArtGalleryMN"
+      },
+      "itemsSold": 215,
+      "itemsBought": 23,
+      "favoriteCategories": ["Fine Art", "Paintings", "Sculptures"]
+    },
+    {
+      "id": 51,
+      "username": "nomadic_treasures",
+      "name": "Enkhbold Ganbat",
+      "email": "enkhbold@example.com",
+      "phone": "+976-99-234567",
+      "avatar": "/assets/users/user51.png",
+      "role": "buyer",
+      "verified": true,
+      "rating": 4.5,
+      "joinDate": "2021-02-18T00:00:00Z",
+      "location": "Erdenet, Mongolia",
+      "bio": "Collector of traditional Mongolian artifacts and nomadic culture items.",
+      "socialMedia": {
+        "facebook": "EnkhboldGanbat"
+      },
+      "itemsSold": 0,
+      "itemsBought": 38,
+      "favoriteCategories": ["Antiques", "Cultural Artifacts", "Traditional Items"]
+    },
+    {
+      "id": 54,
+      "username": "modern_nomad",
+      "name": "Oyunbileg Tsogt",
+      "email": "oyunbileg@example.com",
+      "phone": "+976-99-345678",
+      "avatar": "/assets/users/user54.png",
+      "role": "buyer",
+      "verified": true,
+      "rating": 4.7,
+      "joinDate": "2020-08-12T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Interior designer with a passion for incorporating traditional Mongolian elements into modern spaces.",
+      "socialMedia": {
+        "instagram": "modern_nomad_design",
+        "pinterest": "modernnomadmn"
+      },
+      "itemsSold": 5,
+      "itemsBought": 92,
+      "favoriteCategories": ["Original Artwork", "Home Decor", "Traditional Items"]
+    },
+    {
+      "id": 67,
+      "username": "eagle_hunter",
+      "name": "Batsaikhan Tumur",
+      "email": "batsaikhan@example.com",
+      "phone": "+976-99-456789",
+      "avatar": "/assets/users/user67.png",
+      "role": "both",
+      "verified": true,
+      "rating": 4.6,
+      "joinDate": "2019-12-03T00:00:00Z",
+      "location": "Bayan-Ölgii, Mongolia",
+      "bio": "Kazakh eagle hunter and collector of wildlife art and photography.",
+      "socialMedia": {
+        "instagram": "eagle_hunter_mongolia",
+        "facebook": "BatsaikhanTumur"
+      },
+      "itemsSold": 23,
+      "itemsBought": 45,
+      "favoriteCategories": ["Wildlife Art", "Photography", "Cultural Items"]
+    },
+    {
+      "id": 72,
+      "username": "felt_artist",
+      "name": "Bolormaa Dashnyam",
+      "email": "bolormaa@example.com",
+      "phone": "+976-99-567890",
+      "avatar": "/assets/users/user72.png",
+      "role": "both",
+      "verified": true,
+      "rating": 4.9,
+      "joinDate": "2020-05-20T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Artist specializing in traditional Mongolian felt art with contemporary designs.",
+      "socialMedia": {
+        "instagram": "mongolian_felt_art",
+        "etsy": "MongolianFeltArt"
+      },
+      "itemsSold": 78,
+      "itemsBought": 31,
+      "favoriteCategories": ["Handcrafts", "Textiles", "Traditional Art"]
+    },
+    {
+      "id": 76,
+      "username": "cashmere_lover",
+      "name": "Tuya Lkhagvasuren",
+      "email": "tuya@example.com",
+      "phone": "+976-99-678901",
+      "avatar": "/assets/users/user76.png",
+      "role": "buyer",
+      "verified": true,
+      "rating": 4.4,
+      "joinDate": "2021-09-15T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Fashion enthusiast with a special interest in Mongolian cashmere and sustainable fashion.",
+      "socialMedia": {
+        "instagram": "tuya_fashion",
+        "pinterest": "tuyastyle"
+      },
+      "itemsSold": 2,
+      "itemsBought": 53,
+      "favoriteCategories": ["Fashion", "Textiles", "Accessories"]
+    },
+    {
+      "id": 89,
+      "username": "horse_whisperer",
+      "name": "Ganzorig Batbold",
+      "email": "ganzorig@example.com",
+      "phone": "+976-99-789012",
+      "avatar": "/assets/users/user89.png",
+      "role": "buyer",
+      "verified": true,
+      "rating": 4.7,
+      "joinDate": "2020-07-08T00:00:00Z",
+      "location": "Khövsgöl, Mongolia",
+      "bio": "Horse trainer and enthusiast of equestrian art and equipment.",
+      "socialMedia": {
+        "facebook": "GanzorigBatbold",
+        "youtube": "MongolianHorseTrainer"
+      },
+      "itemsSold": 8,
+      "itemsBought": 47,
+      "favoriteCategories": ["Equestrian Items", "Wildlife Art", "Traditional Crafts"]
+    },
+    {
+      "id": 92,
+      "username": "ger_designer",
+      "name": "Delgermaa Otgon",
+      "email": "delgermaa@example.com",
+      "phone": "+976-99-890123",
+      "avatar": "/assets/users/user92.png",
+      "role": "both",
+      "verified": true,
+      "rating": 4.8,
+      "joinDate": "2019-11-11T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Interior designer specializing in modern ger (yurt) design and traditional furniture.",
+      "socialMedia": {
+        "instagram": "modern_ger_design",
+        "pinterest": "mongolianinteriors"
+      },
+      "itemsSold": 34,
+      "itemsBought": 62,
+      "favoriteCategories": ["Furniture", "Home Decor", "Traditional Items"]
+    },
+    {
+      "id": 103,
+      "username": "tech_nomad",
+      "name": "Bilguun Bayarsaikhan",
+      "email": "bilguun@example.com",
+      "phone": "+976-99-901234",
+      "avatar": "/assets/users/user103.png",
+      "role": "buyer",
+      "verified": true,
+      "rating": 4.6,
+      "joinDate": "2021-01-25T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Tech entrepreneur with a passion for art that blends traditional Mongolian themes with modern technology.",
+      "socialMedia": {
+        "twitter": "TechNomadMN",
+        "linkedin": "bilguun-bayarsaikhan"
+      },
+      "itemsSold": 0,
+      "itemsBought": 28,
+      "favoriteCategories": ["Digital Art", "Modern Art", "Tech-Inspired Art"]
+    },
+    {
+      "id": 107,
+      "username": "throat_singer",
+      "name": "Tsogtbayar Namsrai",
+      "email": "tsogtbayar@example.com",
+      "phone": "+976-99-012345",
+      "avatar": "/assets/users/user107.png",
+      "role": "both",
+      "verified": true,
+      "rating": 4.9,
+      "joinDate": "2020-04-17T00:00:00Z",
+      "location": "Khovd, Mongolia",
+      "bio": "Traditional throat singer and collector of musical instruments and music-related art.",
+      "socialMedia": {
+        "youtube": "MongolianThroatSinger",
+        "instagram": "khoomei_master"
+      },
+      "itemsSold": 12,
+      "itemsBought": 35,
+      "favoriteCategories": ["Musical Instruments", "Cultural Items", "Audio Equipment"]
+    },
+    {
+      "id": 115,
+      "username": "steppe_photographer",
+      "name": "Altantsetseg Batsukh",
+      "email": "altantsetseg@example.com",
+      "phone": "+976-99-123450",
+      "avatar": "/assets/users/user115.png",
+      "role": "both",
+      "verified": true,
+      "rating": 4.7,
+      "joinDate": "2019-08-30T00:00:00Z",
+      "location": "Ulaanbaatar, Mongolia",
+      "bio": "Photographer specializing in Mongolian landscapes and nomadic life.",
+      "socialMedia": {
+        "instagram": "steppe_visions",
+        "facebook": "AltantsetsegPhotography",
+        "500px": "steppe_photographer"
+      },
+      "itemsSold": 67,
+      "itemsBought": 19,
+      "favoriteCategories": ["Photography", "Camera Equipment", "Art Prints"]
+    }
+  ]
+}

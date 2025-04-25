@@ -94,6 +94,7 @@ body {
 .terms {
   display: flex;
   align-items: center;
+  color: #333;
 }
 
 .remember-me input,
@@ -168,6 +169,11 @@ body {
 .google {
   background-color: #db4437;
   color: white;
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.9rem;
 }
 
 /* Responsive design */
