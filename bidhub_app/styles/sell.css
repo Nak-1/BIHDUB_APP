@@ -1,88 +1,154 @@
-/* ───── Basics & Resets ───── */
-*, *::before, *::after { box-sizing: border-box; }
 body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background: #f3f6f9;
-  color: #1b2a41;
+  padding: 0;
+}
+h2 {
+  color:black;
+  font-size:small;
+}
+h3{
+  color:black;
+  font-size:medium;
 }
 
-/* ───── Header ───── */
-.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 32px;
-  height: 64px;
-  background: #ffffff;
-  border-bottom: 1px solid #e0e6ed;
+
+.contact-header {
+  background: linear-gradient(to left, #004e66, #004e66 50%, white 100%);
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: right;
+  padding: 3rem 12rem;
+  text-transform: uppercase;
+  font-family: Arial, sans-serif;
 }
-.site-logo   { font-weight: 700; letter-spacing: .5px; }
-.main-nav a  { margin: 0 12px; text-decoration: none; color: #1b2a41; font-size: 15px; }
-.main-nav a:hover { color: #0e6ba8; }
-.btn {
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
+/* ───── Формын үндсэн wrapper ───── */
+.sell-wrapper{
+  display:flex;
+  justify-content:center;
+  padding:60px 20px;
+}
+
+/* Карт хэлбэр */
+.sell-card{
+  width:100%;
+  max-width:800px;
+  background:#fff;
+  border-radius:12px;
+  box-shadow:0 6px 24px rgba(0,0,0,.08);
+  padding:32px;
+}
+
+/* Гарчиг */
+.sell-title{
+  margin-top:0;
+  margin-bottom:24px;
+  font-size:24px;
+  font-weight:700;
+  text-align:center;
+}
+
+/* Form талбарууд */
+.sell-group{
+  display:flex;
+  flex-direction:column;
+  margin-bottom:20px;
+}
+.sell-group span{
+  margin-bottom:6px;
+  font-size:14px;
+  font-weight:600;
+}
+.sell-group input,
+.sell-group textarea{
+  padding:10px 14px;
+  border:1px solid #c8d0da;
+  border-radius:6px;
+  font-size:15px;
+  resize:vertical;
+}
+.sell-group input:focus,
+.sell-group textarea:focus{
+  outline:2px solid #0e6ba8;
+}
+
+/* 2 багана болгохын тулд half класс */
+.sell-group.half{
+  width:100%;
+}
+@media (min-width:600px){
+  .sell-card{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:20px;
+  }
+  /* span 2 for full‑width fields */
+  .sell-card h2,
+  .sell-group:not(.half){
+    grid-column:1 / -1;
+  }
+}
+
+/* Илгээх товч */
+.sell-submit{
+  grid-column:1 / -1;        /* бүтэн мөр */
+  padding:12px;
+  background:#c0392b;
+  color:#fff;
+  border:none;
+  font-size:16px;
+  font-weight:600;
+  border-radius:6px;
+  cursor:pointer;
+  transition:background .2s;
+}
+.sell-submit:hover{background:#a82315;;}
+
+/* Нийт input, textarea, select-ууд */
+.sell-group input,
+.sell-group textarea,
+.sell-group select {
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+  color: #000; /* Текст хараар */
+  width: 100%;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+/* Focus үед тодруулалт */
+.sell-group input:focus,
+.sell-group textarea:focus,
+.sell-group select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+  background-color: #fff;
+}
+
+/* File input тусад нь стийл */
+.sell-group input[type="file"] {
+  padding: 10px;
+  background-color: #f9f9f9;
+  color: #000;
+  border: 2px solid #ccc;
+  border-radius: 8px;
   cursor: pointer;
 }
-.login-btn { background: #27374d; color: #fff; }
 
-/* ───── Hero banner ───── */
-.hero {
-  padding: 60px 0;
-  background: linear-gradient(90deg, #a6c0d9 0%, #00476b 100%);
-  text-align: center;
-  color: #fff;
-}
-.hero h1 { margin: 0; font-size: 38px; font-weight: 800; }
-
-/* ───── Form Card ───── */
-.wrapper { display: flex; justify-content: center; padding: 60px 20px; }
-
-.auction-card {
-  width: 100%;
-  max-width: 520px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 6px 24px rgba(0,0,0,.08);
-  padding: 32px;
+.sell-group input[type="file"]:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+  background-color: #fff;
 }
 
-.card-title {
-  margin-top: 0;
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-weight: 700;
-  text-align: center;
+/* placeholder стиль */
+.sell-group input::placeholder,
+.sell-group textarea::placeholder {
+  color: #aaa;
+  font-style: italic;
 }
-
-/* ───── Form Elements ───── */
-.form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
-.form-group span { margin-bottom: 6px; font-size: 14px; font-weight: 600; }
-input[type="text"],
-input[type="number"],
-input[type="file"],
-input[type="datetime-local"],
-textarea {
-  padding: 10px 14px;
-  border: 1px solid #c8d0da;
-  border-radius: 6px;
-  font-size: 15px;
-  resize: vertical;
-}
-input:focus,
-textarea:focus {
-  outline: 2px solid #0e6ba8;
-}
-.price-field input { max-width: 200px; }
-
-.submit-btn {
-  width: 100%;
-  background: #0e8a16;   /* ногоон */
-  color: #fff;
-  font-size: 16px;
-  transition: background .2s;
-}
-.submit-btn:hover { background: #0a6b11; }
