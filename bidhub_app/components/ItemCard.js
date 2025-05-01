@@ -6,7 +6,7 @@ export default function ItemCard({ item }) {
   const router = useRouter();
 
   const navigateToItemInfo = (itemId) => {
-    router.push("/itemInfo");
+    router.push(`/itemInfo/${itemId}`);
   };
 
   return( 

@@ -8,21 +8,12 @@ export async function GET(request, { params }) {
     const bidId = parseInt(id);
     
     let targetBid = null;
-    let auctionInfo = null;
     
     for (const auction of auctionsData.auctions) {
-      for (const bid of auction.bidHistory) {
-        console.log(bid.userId, bidId);
-        
-        if (bid.userId === bidId) {
-          targetBid = bid;
-          auctionInfo = {
-            id: auction.id,
-            title: auction.title
-          };
+        if (auction.id === bidId) {
+          targetBid = auction;
           break;
         }
-      }
       if (targetBid) break;
     }
     
@@ -33,10 +24,7 @@ export async function GET(request, { params }) {
       );
     }
     
-    return NextResponse.json({
-      bid: targetBid,
-      auction: auctionInfo
-    });
+    return NextResponse.json(targetBid);
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to fetch bid data' },

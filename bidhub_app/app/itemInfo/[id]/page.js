@@ -1,0 +1,193 @@
+"use client";
+
+import ItemCard from "@/components/ItemCard";
+import "@/styles/HomePage.css";
+import "@/styles/ItemInfo.css";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+
+export default function ItemInfos() {
+  const params = useParams();
+  const itemId = params.id;
+  
+  const [item, setItem] = useState(null);
+  const [bidAmount, setBidAmount] = useState(0);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [relatedAuctions, setRelatedAuctions] = useState([]);
+  
+  useEffect(() => {
+    async function fetchItemData() {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/bids/${itemId}`);
+        if (!response.ok) throw new Error('Failed to fetch item details');
+        const data = await response.json();
+        
+        setItem(data);
+        setBidAmount(data.price);
+        
+        if (data.timeLeft && typeof data.timeLeft === 'string') {
+          const parts = data.timeLeft.split(' ');
+          if (parts.length >= 2 && parts[1].includes('day')) {
+            setTimeLeft(prev => ({...prev, days: parseInt(parts[0])}));
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching item:', err);
+        setError('Failed to load item details. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    async function fetchRelatedAuctions() {
+      try {
+        const response = await fetch('/api/bids');
+        if (!response.ok) throw new Error('Failed to fetch related auctions');
+        const data = await response.json();
+        const filtered = data.auctions.filter(auction => auction.id !== parseInt(itemId)).slice(0, 4);
+        setRelatedAuctions(filtered);
+      } catch (err) {
+        console.error('Error fetching related auctions:', err);
+      }
+    }
+    
+    if (itemId) {
+      fetchItemData();
+      fetchRelatedAuctions();
+    }
+  }, [itemId]);
+  
+  const handleBidChange = (e) => {
+    setBidAmount(e.target.value);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(prevTime => {
+        let { days, hours, minutes, seconds } = prevTime;
+        
+        if (seconds > 0) {
+          seconds -= 1;
+        } else {
+          seconds = 59;
+          if (minutes > 0) {
+            minutes -= 1;
+          } else {
+            minutes = 59;
+            if (hours > 0) {
+              hours -= 1;
+            } else {
+              hours = 23;
+              if (days > 0) {
+                days -= 1;
+              } else {
+                clearInterval(timer);
+                return prevTime;
+              }
+            }
+          }
+        }
+        
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
+
+  if (loading) return <div className="container">Loading item details...</div>;
+  if (error) return <div className="container error-message">{error}</div>;
+  if (!item) return <div className="container">Item not found</div>;
+
+  return (
+    <main>
+      <section className="contact-header">
+        <h1>Авах / зарах</h1>
+      </section>
+      <section>
+        <div className="container">
+          <div className="auction">
+            <div className="image-section">
+              <Image 
+                src={item.image} 
+                alt={item.title || "Auction item"} 
+                width={400} 
+                height={300}
+              />
+            </div>
+
+            <div className="details">
+              <h1>{item.title}</h1>
+              <p className="author">by <i>{item.author || "Unknown Artist"}</i></p>
+              <p className="price">Одоогийн үнэ: <strong>{item.price}₮</strong></p>
+              <div className="countdown">
+                <div className="time-box"><span>{String(timeLeft.days).padStart(2, '0')}</span> <br/> өдөр</div>
+                <div className="time-box"><span>{String(timeLeft.hours).padStart(2, '0')}</span> <br/> цаг</div>
+                <div className="time-box"><span>{String(timeLeft.minutes).padStart(2, '0')}</span> <br/> минут</div>
+                <div className="time-box"><span>{String(timeLeft.seconds).padStart(2, '0')}</span> <br/> секунд</div>
+              </div>
+              <p className="deadline">Дуусах хугацаа: {item.endDate || "Not specified"}</p>
+              <div className="bid-section">
+                <input 
+                  type="number" 
+                  value={bidAmount} 
+                  onChange={handleBidChange}
+                  min={item.price}
+                /> 
+                <button>Дуудлага</button>
+              </div>
+              <p className="interest">👁 {item.views || 10} хэрэглэгч сонирхож байна</p>
+            </div>
+          </div>
+
+          <h2>Тендер</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th>Тендер оролцогч</th>
+                <th>Дуудсан үнэ</th>
+                <th>Цаг</th>
+              </tr>
+              {item.bidHistory && item.bidHistory.length > 0 ? (
+                item.bidHistory.map((bid, index) => (
+                  <tr key={index}>
+                    <td>{bid.userId}</td>
+                    <td>{bid.amount}₮</td>
+                    <td>{bid.time}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No bids yet</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section className="section2">
+        <div className="section2-content">
+          <h1>Хамгийн сүүлийн дуудлага худалдаа</h1>
+          <div id="auctionContainer" className="auction-cards">
+            {relatedAuctions.length > 0 ? (
+              relatedAuctions.map((auction, index) => (
+                <ItemCard item={auction} key={index}/>
+              ))
+            ) : (
+              <p>No related auctions available.</p>
+            )}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

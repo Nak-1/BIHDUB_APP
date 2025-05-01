@@ -12,7 +12,7 @@
         "/assests/item1_detail1.png",
         "/assests/item1_detail2.png"
       ],
-      "timeLeft": "2 цаг",
+      "timeLeft": "2 day",
       "endDate": "2023-12-15T18:00:00Z",
       "currentBids": 5,
       "bidHistory": [
@@ -46,7 +46,7 @@
         "/assests/item2_detail1.png",
         "/assests/item2_detail2.png"
       ],
-      "timeLeft": "5 цаг",
+      "timeLeft": "1 day",
       "endDate": "2023-12-15T21:00:00Z",
       "currentBids": 3,
       "bidHistory": [
@@ -79,7 +79,7 @@
         "/assests/item3_detail2.png",
         "/assests/item3_signature.png"
       ],
-      "timeLeft": "1 өдөр",
+      "timeLeft": "1 day",
       "endDate": "2023-12-16T15:00:00Z",
       "currentBids": 8,
       "bidHistory": [
@@ -118,7 +118,7 @@
         "/assests/item4_detail2.png",
         "/assests/item4_interior.png"
       ],
-      "timeLeft": "3 өдөр",
+      "timeLeft": "3 day",
       "endDate": "2023-12-18T12:00:00Z",
       "currentBids": 4,
       "bidHistory": [
