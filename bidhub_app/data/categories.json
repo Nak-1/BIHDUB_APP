@@ -1,0 +1,39 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Electronics",
+      "icon": "/assests/icons/electronics.png",
+      "description": "Computers, phones, TVs, and other electronic devices",
+      "itemCount": 24
+    },
+    {
+      "id": 2,
+      "name": "Art & Collectibles",
+      "icon": "/assests/icons/art.png",
+      "description": "Paintings, sculptures, and collectible items",
+      "itemCount": 18
+    },
+    {
+      "id": 3,
+      "name": "Traditional Items",
+      "icon": "/assests/icons/traditional.png",
+      "description": "Mongolian traditional clothing, crafts, and artifacts",
+      "itemCount": 15
+    },
+    {
+      "id": 4,
+      "name": "Luxury Goods",
+      "icon": "/assests/icons/luxury.png",
+      "description": "Watches, jewelry, and designer items",
+      "itemCount": 12
+    },
+    {
+      "id": 5,
+      "name": "Home & Garden",
+      "icon": "/assests/icons/home.png",
+      "description": "Furniture, decor, and garden items",
+      "itemCount": 20
+    }
+  ]
+}

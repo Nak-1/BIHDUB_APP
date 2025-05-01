@@ -1,0 +1,44 @@
+{
+  "transactions": [
+    {
+      "id": "T1001",
+      "auctionId": 42,
+      "itemTitle": "Antique Silver Bowl",
+      "sellerId": 28,
+      "buyerId": 103,
+      "finalPrice": 450000,
+      "currency": "₮",
+      "date": "2023-12-01T14:30:00Z",
+      "status": "completed",
+      "paymentMethod": "bank_transfer",
+      "shippingMethod": "delivery",
+      "shippingAddress": {
+        "name": "Oyuntsetseg Batbold",
+        "street": "Peace Avenue 10-5",
+        "city": "Ulaanbaatar",
+        "district": "Sukhbaatar",
+        "phone": "+97699887766"
+      }
+    },
+    {
+      "id": "T1002",
+      "auctionId": 38,
+      "itemTitle": "Handmade Leather Saddle",
+      "sellerId": 15,
+      "buyerId": 101,
+      "finalPrice": 780000,
+      "currency": "₮",
+      "date": "2023-12-05T10:15:00Z",
+      "status": "shipping",
+      "paymentMethod": "qpay",
+      "shippingMethod": "delivery",
+      "shippingAddress": {
+        "name": "Bayarmaa Munkhbat",
+        "street": "Chinggis Avenue 25-12",
+        "city": "Ulaanbaatar",
+        "district": "Khan-Uul",
+        "phone": "+97699112233"
+      }
+    }
+  ]
+}

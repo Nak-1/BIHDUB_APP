@@ -1,0 +1,24 @@
+{
+  "reviews": [
+    {
+      "id": "R1001",
+      "transactionId": "T1001",
+      "reviewerId": 103,
+      "sellerId": 28,
+      "rating": 5,
+      "comment": "Excellent seller! The item was exactly as described and shipping was fast.",
+      "date": "2023-12-05T18:20:00Z",
+      "itemId": 42
+    },
+    {
+      "id": "R1002",
+      "transactionId": "T1002",
+      "reviewerId": 101,
+      "sellerId": 15,
+      "rating": 4,
+      "comment": "Beautiful craftsmanship on the saddle. Shipping took a bit longer than expected.",
+      "date": "2023-12-10T09:45:00Z",
+      "itemId": 38
+    }
+  ]
+}
