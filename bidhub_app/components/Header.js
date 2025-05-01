@@ -13,6 +13,12 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = () => {
@@ -27,11 +33,29 @@ export default function Header() {
     };
   }, [profileDropdownOpen]);
 
+  useEffect(() => {
+    if (mounted) {
+      const userLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      setIsLoggedIn(userLoggedIn);
+    }
+  }, [mounted]);
 
   useEffect(() => {
-    const userLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    setIsLoggedIn(userLoggedIn);
-  }, []);
+    if (!mounted) return;
+    
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [mounted]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -52,7 +76,7 @@ export default function Header() {
 
   return (
     <>
-      <header>
+      <header className={scrolled ? "scrolled" : ""}>
         <nav className="navbar">
           <div className="logo">
             <Link href="/">
@@ -68,27 +92,29 @@ export default function Header() {
           <button
             className={`hamburger ${menuOpen ? "active" : ""}`} 
             onClick={toggleMenu}
+            aria-label="Menu"
           >
             <span></span>
             <span></span>
             <span></span>
           </button>
           <div className={`nav-links ${menuOpen ? "active" : ""}`}>
-            <Link href="/">Нүүр</Link>
-            <Link href="/auctions">Дуудлага худалдаа</Link>
-            <Link href="/buySell">Авах, зарах</Link>
-            <Link href="/aboutUs">Бидний тухай</Link>
-            <Link href="/contactUs">Холбогдох</Link>
-            <button className="search-btn" aria-label="Хайх">
+            <Link href="/" onClick={() => setMenuOpen(false)}>Нүүр</Link>
+            <Link href="/auctions" onClick={() => setMenuOpen(false)}>Дуудлага худалдаа</Link>
+            <Link href="/buySell" onClick={() => setMenuOpen(false)}>Авах, зарах</Link>
+            <Link href="/aboutUs" onClick={() => setMenuOpen(false)}>Бидний тухай</Link>
+            <Link href="/contactUs" onClick={() => setMenuOpen(false)}>Холбогдох</Link>
+            <Link href="/search" className="search-btn" onClick={() => setMenuOpen(false)} aria-label="Хайх">
+              <span className="search-text">Хайх</span>
               <Image
                 src={searchIcon}
                 alt="Search Icon"
                 width={16}
                 height={16}
               />
-            </button>
+            </Link>
             
-            {isLoggedIn ? (
+            {mounted && (isLoggedIn ? (
               <div className="profile-container">
                 <button 
                   className="profile-btn" 
@@ -105,15 +131,15 @@ export default function Header() {
                 
                 {profileDropdownOpen && (
                   <div className="profile-dropdown" onClick={(e) => e.stopPropagation()}>
-                    <Link href="/profile">Профайл</Link>
-                    <Link href="/settings">Тохиргоо</Link>
+                    <Link href="/profile" onClick={() => setProfileDropdownOpen(false)}>Профайл</Link>
+                    <Link href="/settings" onClick={() => setProfileDropdownOpen(false)}>Тохиргоо</Link>
                     <button onClick={handleLogout}>Гарах</button>
                   </div>
                 )}
               </div>
             ) : (
-              <Link href="/auth" className="settings-btn" aria-label="Нэвтрэх">Нэвтрэх</Link>
-            )}
+              <Link href="/auth" className="settings-btn" onClick={() => setMenuOpen(false)} aria-label="Нэвтрэх">Нэвтрэх</Link>
+            ))}
           </div>
         </nav>
       </header>

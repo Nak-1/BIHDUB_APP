@@ -1,44 +1,49 @@
 .auction-card {
-  height: 40rem;
-  width: 20rem;
+  height: 30rem;
+  width: 100%;
+  max-width: 18rem;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
+  margin: 0 auto;
 }
 
 .auction-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .auction-image {
   width: 100%;
-  height: 400px;
+  height: 250px;
   object-fit: cover;
 }
 
 .auction-details {
-  padding: 1.5rem;
+  padding: 1.2rem;
 }
 
 .auction-title {
   color: #000;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .auction-price {
   color: var(--accent-color);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .auction-time {
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -46,16 +51,63 @@
 
 .bid-button {
   width: 100%;
-  padding: 0.8rem;
+  padding: 0.7rem;
   background: var(--accent-color);
   color: white;
   border: none;
   border-radius: 6px;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   cursor: pointer;
   transition: background 0.3s ease;
+  font-size: 0.9rem;
 }
 
 .bid-button:hover {
   background: #c0392b;
+}
+
+@media (max-width: 1200px) {
+  .auction-card {
+    max-width: 16rem;
+    height: 30rem;
+  }
+
+  .auction-image {
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .auction-card {
+    max-width: 15rem;
+    height: 28rem;
+  }
+
+  .auction-image {
+    height: 200px;
+  }
+
+  .auction-details {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auction-card {
+    max-width: 100%;
+    height: auto;
+    min-height: 26rem;
+  }
+
+  .auction-image {
+    height: 180px;
+  }
+
+  .auction-title {
+    font-size: 1rem;
+  }
+
+  .auction-price {
+    font-size: 1.1rem;
+  }
 }
