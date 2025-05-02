@@ -1,57 +1,104 @@
 "use client";
-import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import DepositModal from "../../components/DepositModal";
 import "../../styles/Profile.css";
 
-const orders = [
-  { id: 210, date: "July 23, 2022", status: "Waiting payment", total: "$700 for 1 item" },
-  { id: 210, date: "June 23, 2022", status: "Waiting payment", total: "$1,000 for 1 item" },
-  { id: 210, date: "May 26, 2022", status: "Success", total: "$500 for 1 item" },
-  { id: 210, date: "May 23, 2022", status: "Success", total: "$600 for 1 item" },
-  { id: 210, date: "May 23, 2022", status: "Cancelled", total: "$200 for 1 item" }
-];
-
-const products = [
-  {
-    id: 1,
-    image: null,
-    name: "Plant and Pots",
-    yourBid: "$1,000",
-    currentBid: "$800",
-    status: "Эхэлсэн"
-  },
-  {
-    id: 2,
-    image: null,
-    name: "Bird in Forest",
-    yourBid: "$1,200",
-    currentBid: "$1,100",
-    status: "Эхэлсэн"
-  },
-  {
-    id: 3,
-    image: null,
-    name: "Woman in Forest",
-    yourBid: "$700",
-    currentBid: "$700",
-    status: "Эхэлсэн"
-  }
-];
-
-const transactions = [
-  { id: 1, date: "2023-10-15", type: "Deposit", amount: "$500", status: "Completed" },
-  { id: 2, date: "2023-10-10", type: "Withdrawal", amount: "$200", status: "Completed" },
-  { id: 3, date: "2023-09-28", type: "Auction Purchase", amount: "$350", status: "Completed" },
-  { id: 4, date: "2023-09-15", type: "Deposit", amount: "$1,000", status: "Completed" }
-];
-
 const ProfilePage = () => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("history");
   const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   const [walletBalance, setWalletBalance] = useState(2450);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  const [orders, setOrders] = useState([
+    { id: 210, date: "July 23, 2022", status: "Waiting payment", total: "$700 for 1 item" },
+    { id: 211, date: "June 23, 2022", status: "Waiting payment", total: "$1,000 for 1 item" },
+    { id: 212, date: "May 26, 2022", status: "Success", total: "$500 for 1 item" },
+    { id: 213, date: "May 23, 2022", status: "Success", total: "$600 for 1 item" },
+    { id: 214, date: "May 23, 2022", status: "Cancelled", total: "$200 for 1 item" }
+  ]);
+  
+  const [products, setProducts] = useState([
+    {
+      id: 1,
+      image: null,
+      name: "Plant and Pots",
+      yourBid: "$1,000",
+      currentBid: "$800",
+      status: "Эхэлсэн"
+    },
+    {
+      id: 2,
+      image: null,
+      name: "Bird in Forest",
+      yourBid: "$1,200",
+      currentBid: "$1,100",
+      status: "Эхэлсэн"
+    },
+    {
+      id: 3,
+      image: null,
+      name: "Woman in Forest",
+      yourBid: "$700",
+      currentBid: "$700",
+      status: "Эхэлсэн"
+    }
+  ]);
+  
+  const [transactions, setTransactions] = useState([
+    { id: 1, date: "2023-10-15", type: "Deposit", amount: "$500", status: "Completed" },
+    { id: 2, date: "2023-10-10", type: "Withdrawal", amount: "$200", status: "Completed" },
+    { id: 3, date: "2023-09-28", type: "Auction Purchase", amount: "$350", status: "Completed" },
+    { id: 4, date: "2023-09-15", type: "Deposit", amount: "$1,000", status: "Completed" }
+  ]);
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const userId = localStorage.getItem("userId");
+    
+    if (!isLoggedIn) {
+      router.push("/auth");
+      return;
+    }
+    
+    async function fetchUserData() {
+      try {
+        setLoading(true);
+        
+        const response = await fetch('/api/auth');
+        if (!response.ok) throw new Error('Failed to fetch user data');
+        
+        const data = await response.json();
+        
+        let currentUser;
+        if (userId) {
+          currentUser = data.users.find(user => user.id.toString() === userId);
+        } else {
+          const userEmail = localStorage.getItem("userEmail");
+          currentUser = data.users.find(user => user.email === userEmail);
+        }
+        
+        if (!currentUser) {
+          throw new Error('User not found');
+        }
+        
+        setUserData(currentUser);
+      } catch (err) {
+        console.error('Error fetching user data:', err);
+        setError('Failed to load user data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    }
+    
+    fetchUserData();
+  }, [router]);
 
   const handleDeposit = (depositData) => {
-    
     setWalletBalance(prevBalance => prevBalance + depositData.amount);
     
     const newTransaction = {
@@ -62,8 +109,23 @@ const ProfilePage = () => {
       status: "Completed"
     };
     
-    transactions.unshift(newTransaction);
+    setTransactions(prev => [newTransaction, ...prev]);
   };
+  
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userAvatar");
+    localStorage.removeItem("userRole");
+    
+    router.push("/auth");
+  };
+
+  if (loading) return <div className="loading">Loading user data...</div>;
+  if (error) return <div className="error-message">{error}</div>;
+  if (!userData) return <div className="error-message">User not found. Please <a href="/auth">login again</a>.</div>;
 
   return (
     <main>
@@ -74,11 +136,19 @@ const ProfilePage = () => {
       <section className="profile-content">
         <aside className="sidebar">
           <div className="profile-header">
-            <div className="profile-avatar">👤</div>
+            <div className="profile-avatar">
+              <Image 
+                src={userData.avatar} 
+                alt="" 
+                width={60} 
+                height={60} 
+                className="avatar-image"
+              />
+            </div>
             <div className="profile-info">
-              <h2>Батболд</h2>
-              <p>john.appleseed@gmail.com</p>
-              <a href="/" className="logout">Гарах</a>
+              <h2>{userData.name}</h2>
+              <p>{userData.email}</p>
+              <button onClick={handleLogout} className="logout">Гарах</button>
             </div>
           </div>
           <nav className="menu">
@@ -169,30 +239,50 @@ const ProfilePage = () => {
             <div className="content">
               <div className="card">
                 <h3>Хувийн мэдээлэл</h3>
-                <p><strong>Нэр:</strong> John</p>
-                <p><strong>Овог:</strong> Appleseed</p>
-                <p><strong>И-мэйл:</strong> john.appleseed@gmail.com</p>
-                <p><strong>Нууц үг:</strong> ******</p>
+                <p><strong>Нэр:</strong> {userData.name}</p>
+                <p><strong>И-мэйл:</strong> {userData.email}</p>
+                <p><strong>Утас:</strong> {userData.phone || "Not provided"}</p>
+                <p><strong>Байршил:</strong> {userData.location || "Not provided"}</p>
+                <p><strong>Бүртгүүлсэн огноо:</strong> {new Date(userData.joinDate).toLocaleDateString()}</p>
+                <p><strong>Үнэлгээ:</strong> {userData.rating} / 5</p>
                 <button className="edit-btn">Засах</button>
               </div>
 
               <div className="card">
                 <h3>Тооцооны мэдээлэл, хаяг</h3>
-                <p><strong>Нэр:</strong> John</p>
-                <p><strong>Овог:</strong> Appleseed</p>
-                <p><strong>Картын дугаар:</strong> 3128321043392</p>
-                <p><strong>Хаяг:</strong> Jl. KH Hasyim Ashari, RT.006/RW...</p>
+                <p><strong>Нэр:</strong> {userData.name.split(' ')[0]}</p>
+                <p><strong>Овог:</strong> {userData.name.split(' ').slice(1).join(' ')}</p>
+                <p><strong>Картын дугаар:</strong> ************</p>
+                <p><strong>Хаяг:</strong> {userData.location || "Not provided"}</p>
                 <button className="edit-btn">Засах</button>
               </div>
 
               <div className="card">
                 <h3>Хүргэлтийн мэдээлэл, хаяг</h3>
-                <p><strong>Нэр:</strong> John</p>
-                <p><strong>Овог:</strong> Appleseed</p>
+                <p><strong>Нэр:</strong> {userData.name.split(' ')[0]}</p>
+                <p><strong>Овог:</strong> {userData.name.split(' ').slice(1).join(' ')}</p>
                 <p><strong>CIF/SSN:</strong> ******</p>
-                <p><strong>Хаяг:</strong> Jl. KH Hasyim Ashari, RT.006/RW...</p>
+                <p><strong>Хаяг:</strong> {userData.location || "Not provided"}</p>
                 <button className="edit-btn">Засах</button>
               </div>
+              
+              {userData.bio && (
+                <div className="card">
+                  <h3>Миний тухай</h3>
+                  <p>{userData.bio}</p>
+                  <button className="edit-btn">Засах</button>
+                </div>
+              )}
+              
+              {userData.socialMedia && Object.keys(userData.socialMedia).length > 0 && (
+                <div className="card">
+                  <h3>Сошиал хаягууд</h3>
+                  {Object.entries(userData.socialMedia).map(([platform, handle]) => (
+                    <p key={platform}><strong>{platform}:</strong> {handle}</p>
+                  ))}
+                  <button className="edit-btn">Засах</button>
+                </div>
+              )}
             </div>
           ) : activeTab === "wallet" ? (
             <div className="wallet-container">
@@ -209,6 +299,17 @@ const ProfilePage = () => {
                   <button className="wallet-btn withdraw">Мөнгө гаргах</button>
                 </div>
               </div>
+              
+              {/* <div className="wallet-stats">
+                <div className="stat-card">
+                  <h4>Зарсан бараа</h4>
+                  <div className="stat-value">{userData.itemsSold || 0}</div>
+                </div>
+                <div className="stat-card">
+                  <h4>Авсан бараа</h4>
+                  <div className="stat-value">{userData.itemsBought || 0}</div>
+                </div>
+              </div> */}
               
               <div className="wallet-transactions">
                 <h3>Сүүлийн гүйлгээнүүд</h3>

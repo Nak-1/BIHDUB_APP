@@ -20,6 +20,8 @@ export default function Auth() {
     
     try {
       const response = await fetch('/api/auth');
+      if (!response.ok) throw new Error('Failed to fetch user data');
+      
       const data = await response.json();
       
       const user = data.users.find(user => user.email === email);
@@ -31,6 +33,11 @@ export default function Auth() {
       }
       
       localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userId", user.id.toString());
+      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("userName", user.name);
+      localStorage.setItem("userAvatar", user.avatar);
+      localStorage.setItem("userRole", user.role);
       
       router.push("/profile");
     } catch (error) {
@@ -40,10 +47,46 @@ export default function Auth() {
     }
   };
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    localStorage.setItem("isLoggedIn", "true");
-    router.push("/profile");
+    setError("");
+    setLoading(true);
+    
+    const fullname = e.target.fullname.value;
+    const email = e.target.email.value;
+    const phone = e.target.phone.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target["confirm-password"].value;
+    
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      const response = await fetch('/api/users');
+      if (!response.ok) throw new Error('Failed to fetch user data');
+      
+      const data = await response.json();
+      const existingUser = data.users.find(user => user.email === email);
+      
+      if (existingUser) {
+        setError("User with this email already exists");
+        setLoading(false);
+        return;
+      }
+      
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("userName", fullname);
+      
+      router.push("/profile");
+    } catch (error) {
+      console.error("Registration error:", error);
+      setError("An error occurred. Please try again.");
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,11 +126,6 @@ export default function Auth() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Нууц үг</label>
-                  {error && (
-                    <div className="error-message">
-                      {error}
-                    </div>
-                  )}
                   <input type="password" id="password" name="password" required />
                 </div>
                 <div className="form-options">
@@ -120,6 +158,11 @@ export default function Auth() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="signup-email">И-мэйл</label>
+                  {error && (
+                    <div className="error-message">
+                      {error}
+                    </div>
+                  )}
                   <input type="email" id="signup-email" name="email" required />
                 </div>
                 <div className="form-group">
