@@ -19,30 +19,31 @@ export default function Auth() {
     const password = e.target.password.value;
     
     try {
-      const response = await fetch('/api/auth');
-      if (!response.ok) throw new Error('Failed to fetch user data');
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
       
       const data = await response.json();
       
-      const user = data.users.find(user => user.email === email);
-      
-      if (!user) {
-        setError("Invalid email or password");
-        setLoading(false);
-        return;
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
       }
       
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userId", user.id.toString());
-      localStorage.setItem("userEmail", user.email);
-      localStorage.setItem("userName", user.name);
-      localStorage.setItem("userAvatar", user.avatar);
-      localStorage.setItem("userRole", user.role);
+      localStorage.setItem("userId", data.user.id.toString());
+      localStorage.setItem("userEmail", data.user.email);
+      localStorage.setItem("userName", data.user.name);
+      localStorage.setItem("userAvatar", data.user.avatar || '/assets/users/default.png');
+      localStorage.setItem("userRole", data.user.role);
       
       router.push("/profile");
     } catch (error) {
       console.error("Login error:", error);
-      setError("An error occurred. Please try again.");
+      setError(error.message || "Invalid email or password");
       setLoading(false);
     }
   };
@@ -52,7 +53,7 @@ export default function Auth() {
     setError("");
     setLoading(true);
     
-    const fullname = e.target.fullname.value;
+    const name = e.target.fullname.value;
     const email = e.target.email.value;
     const phone = e.target.phone.value;
     const password = e.target.password.value;
@@ -65,26 +66,42 @@ export default function Auth() {
     }
     
     try {
-      const response = await fetch('/api/users');
-      if (!response.ok) throw new Error('Failed to fetch user data');
+      const username = email.split('@')[0];
+      
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          name,
+          email,
+          phone,
+          password,
+          role: 'buyer',
+          verified: false,
+          avatar: '/assets/users/default.png'
+        }),
+      });
       
       const data = await response.json();
-      const existingUser = data.users.find(user => user.email === email);
       
-      if (existingUser) {
-        setError("User with this email already exists");
-        setLoading(false);
-        return;
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed');
       }
       
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userEmail", email);
-      localStorage.setItem("userName", fullname);
+      localStorage.setItem("userId", data.user.id.toString());
+      localStorage.setItem("userEmail", data.user.email);
+      localStorage.setItem("userName", data.user.name);
+      localStorage.setItem("userAvatar", data.user.avatar);
+      localStorage.setItem("userRole", data.user.role);
       
       router.push("/profile");
     } catch (error) {
       console.error("Registration error:", error);
-      setError("An error occurred. Please try again.");
+      setError(error.message || "An error occurred. Please try again.");
       setLoading(false);
     }
   };

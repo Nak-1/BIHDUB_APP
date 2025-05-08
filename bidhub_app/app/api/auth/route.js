@@ -1,29 +1,19 @@
-import userData from '@/data/users.json';
+import dbConnect from '@/lib/mongodb';
+import User from '@/model/user';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    return NextResponse.json(userData);
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to fetch user data' },
-      { status: 500 }
-    );
-  }
-}
-
-export async function POST(request) {
-  try {
-    const body = await request.json();
+    await dbConnect();
     
-    return NextResponse.json({ 
-      message: 'User registration received successfully', 
-      user: body 
-    }, { status: 201 });
+    const users = await User.find({}).select('-password');
+    
+    return NextResponse.json({ users });
   } catch (error) {
+    console.error('Failed to fetch users data:', error);
     return NextResponse.json(
-      { error: 'Failed to process user registration' },
-      { status: 400 }
+      { error: 'Failed to fetch users data' },
+      { status: 500 }
     );
   }
 }
