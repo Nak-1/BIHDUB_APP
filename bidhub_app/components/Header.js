@@ -102,6 +102,7 @@ export default function Header() {
             <Link href="/" onClick={() => setMenuOpen(false)}>Нүүр</Link>
             <Link href="/auctions" onClick={() => setMenuOpen(false)}>Дуудлага худалдаа</Link>
             <Link href="/buySell" onClick={() => setMenuOpen(false)}>Авах, зарах</Link>
+            <Link href="/news" onClick={() => setMenuOpen(false)}>Мэдээ</Link>
             <Link href="/aboutUs" onClick={() => setMenuOpen(false)}>Бидний тухай</Link>
             <Link href="/contactUs" onClick={() => setMenuOpen(false)}>Холбогдох</Link>
             <Link href="/search" className="search-btn" onClick={() => setMenuOpen(false)} aria-label="Хайх">

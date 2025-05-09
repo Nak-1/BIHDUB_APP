@@ -76,6 +76,7 @@ body {
   border-radius: 4px;
   font-size: 1rem;
   transition: border 0.3s ease;
+  color: #000000;
 }
 
 .form-group input:focus {
