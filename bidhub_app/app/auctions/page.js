@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import auctionData from "../../data/auctions.json";
 import "../../styles/Auctions.css";
+import io from 'socket.io-client';
+
+let socket;
 
 export default function Auctions() {
   const [activeTab, setActiveTab] = useState("all");
@@ -28,6 +31,42 @@ export default function Auctions() {
 
   const navigateToItemInfo = (itemId) => {
     router.push("/itemInfo");
+  };
+
+
+  const [currentBid, setCurrentBid] = useState(0);
+  const [myBid, setMyBid] = useState('');
+
+  useEffect(() => {
+    if (!socket) {
+      fetch('/api/socket'); // Server-г эхлүүлнэ
+      socket = io();
+
+      socket.on('connect', () => {
+        console.log('Socket connected');
+      });
+
+      socket.on('update_bid', (data) => {
+        setCurrentBid(data);
+      });
+    }
+
+    return () => {
+      if (socket) {
+        socket.disconnect();
+        socket = null;
+      }
+    };
+  }, []);
+
+  const submitBid = () => {
+    const bidAmount = parseInt(myBid, 10);
+    if (bidAmount > currentBid) {
+      socket.emit('new_bid', bidAmount);
+      setMyBid('');
+    } else {
+      alert('Одоогийн үнээс өндөр үнэ оруулна уу');
+    }
   };
 
   return (
