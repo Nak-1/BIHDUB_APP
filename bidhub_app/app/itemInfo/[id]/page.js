@@ -1,18 +1,19 @@
 "use client";
 
+import BidForm from "@/components/BidForm";
 import ItemCard from "@/components/ItemCard";
 import "@/styles/HomePage.css";
 import "@/styles/ItemInfo.css";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ItemInfos() {
   const params = useParams();
+  const router = useRouter();
   const itemId = params.id;
   
   const [item, setItem] = useState(null);
-  const [bidAmount, setBidAmount] = useState(0);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -22,26 +23,30 @@ export default function ItemInfos() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [relatedAuctions, setRelatedAuctions] = useState([]);
+  const [isAuctionActive, setIsAuctionActive] = useState(true);
   
   useEffect(() => {
     async function fetchItemData() {
       try {
         setLoading(true);
         const response = await fetch(`/api/bids/${itemId}`);
-        if (!response.ok) throw new Error('Failed to fetch item details');
-        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch item details');
+        }
         
+        const data = await response.json();
         setItem(data);
-        setBidAmount(data.price);
         
         if (data.timeLeft && typeof data.timeLeft === 'string') {
           const parts = data.timeLeft.split(' ');
           if (parts.length >= 2 && parts[1].includes('day')) {
-            setTimeLeft(prev => ({...prev, days: parseInt(parts[0])}));
+            const days = parseInt(parts[0]);
+            setTimeLeft(prev => ({...prev, days}));
+            setIsAuctionActive(days > 0);
           }
         }
       } catch (err) {
-        console.error('Error fetching item:', err);
         setError('Failed to load item details. Please try again later.');
       } finally {
         setLoading(false);
@@ -52,13 +57,23 @@ export default function ItemInfos() {
       try {
         const response = await fetch('/api/bids');
         if (!response.ok) throw new Error('Failed to fetch related auctions');
+        
         const data = await response.json();
-        const filtered = data.auctions.filter(auction => auction.id !== parseInt(itemId)).slice(0, 4);
-        setRelatedAuctions(filtered);
+        
+        if (!data.auctions || !Array.isArray(data.auctions)) {
+          console.error("Unexpected data structure:", data);
+          setRelatedAuctions([]);
+          return;
+        }
+        
+        const otherAuctions = data.auctions.filter(auction => auction.id !== parseInt(itemId));
+        
+        setRelatedAuctions(otherAuctions);
       } catch (err) {
         console.error('Error fetching related auctions:', err);
+        setRelatedAuctions([]);
       }
-    }
+    }    
     
     if (itemId) {
       fetchItemData();
@@ -66,10 +81,6 @@ export default function ItemInfos() {
     }
   }, [itemId]);
   
-  const handleBidChange = (e) => {
-    setBidAmount(e.target.value);
-  };
-
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(prevTime => {
@@ -91,6 +102,7 @@ export default function ItemInfos() {
                 days -= 1;
               } else {
                 clearInterval(timer);
+                setIsAuctionActive(false);
                 return prevTime;
               }
             }
@@ -136,15 +148,13 @@ export default function ItemInfos() {
                 <div className="time-box"><span>{String(timeLeft.seconds).padStart(2, '0')}</span> <br/> секунд</div>
               </div>
               <p className="deadline">Дуусах хугацаа: {item.endDate || "Not specified"}</p>
-              <div className="bid-section">
-                <input 
-                  type="number" 
-                  value={bidAmount} 
-                  onChange={handleBidChange}
-                  min={item.price}
-                /> 
-                <button>Дуудлага</button>
-              </div>
+              
+              <BidForm 
+                auctionId={itemId} 
+                currentPrice={item.price} 
+                isActive={isAuctionActive} 
+              />
+              
               <p className="interest">👁 {item.views || 10} хэрэглэгч сонирхож байна</p>
             </div>
           </div>
@@ -178,12 +188,12 @@ export default function ItemInfos() {
         <div className="section2-content">
           <h1>Хамгийн сүүлийн дуудлага худалдаа</h1>
           <div id="auctionContainer" className="auction-cards">
-            {relatedAuctions.length > 0 ? (
+            {relatedAuctions && relatedAuctions.length > 0 ? (
               relatedAuctions.map((auction, index) => (
                 <ItemCard item={auction} key={index}/>
               ))
             ) : (
-              <p>No related auctions available.</p>
+              <p>Одоогоор өөр дуудлага худалдаа байхгүй байна.</p>
             )}
           </div>
         </div>

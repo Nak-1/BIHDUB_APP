@@ -24,14 +24,12 @@ h3{
   text-transform: uppercase;
   font-family: Arial, sans-serif;
 }
-/* ───── Формын үндсэн wrapper ───── */
 .sell-wrapper{
   display:flex;
   justify-content:center;
   padding:60px 20px;
 }
 
-/* Карт хэлбэр */
 .sell-card{
   width:100%;
   max-width:800px;
@@ -41,7 +39,6 @@ h3{
   padding:32px;
 }
 
-/* Гарчиг */
 .sell-title{
   margin-top:0;
   margin-bottom:24px;
@@ -50,7 +47,6 @@ h3{
   text-align:center;
 }
 
-/* Form талбарууд */
 .sell-group{
   display:flex;
   flex-direction:column;
@@ -74,7 +70,6 @@ h3{
   outline:2px solid #0e6ba8;
 }
 
-/* 2 багана болгохын тулд half класс */
 .sell-group.half{
   width:100%;
 }
@@ -84,16 +79,14 @@ h3{
     grid-template-columns:1fr 1fr;
     column-gap:20px;
   }
-  /* span 2 for full‑width fields */
   .sell-card h2,
   .sell-group:not(.half){
     grid-column:1 / -1;
   }
 }
 
-/* Илгээх товч */
 .sell-submit{
-  grid-column:1 / -1;        /* бүтэн мөр */
+  grid-column:1 / -1;
   padding:12px;
   background:#c0392b;
   color:#fff;
@@ -106,7 +99,6 @@ h3{
 }
 .sell-submit:hover{background:#a82315;;}
 
-/* Нийт input, textarea, select-ууд */
 .sell-group input,
 .sell-group textarea,
 .sell-group select {
@@ -115,13 +107,12 @@ h3{
   border-radius: 8px;
   padding: 10px;
   font-size: 16px;
-  color: #000; /* Текст хараар */
+  color: #000;
   width: 100%;
   transition: border 0.3s ease, box-shadow 0.3s ease;
   outline: none;
 }
 
-/* Focus үед тодруулалт */
 .sell-group input:focus,
 .sell-group textarea:focus,
 .sell-group select:focus {
@@ -130,7 +121,6 @@ h3{
   background-color: #fff;
 }
 
-/* File input тусад нь стийл */
 .sell-group input[type="file"] {
   padding: 10px;
   background-color: #f9f9f9;
@@ -146,9 +136,173 @@ h3{
   background-color: #fff;
 }
 
-/* placeholder стиль */
 .sell-group input::placeholder,
 .sell-group textarea::placeholder {
   color: #aaa;
   font-style: italic;
+}
+
+.image-upload-container {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.upload-label {
+  display: block;
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.upload-label:hover {
+  border-color: #004e66;
+  background-color: rgba(0, 78, 102, 0.05);
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #666;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.preview-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.change-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.preview-container:hover .change-image {
+  opacity: 1;
+}
+
+.date-container {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.error-input {
+  border: 1px solid #ff3b30 !important;
+  background-color: rgba(255, 59, 48, 0.05);
+}
+
+.error-message {
+  color: #ff3b30;
+  font-size: 0.8rem;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.message-container {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.message-container.success {
+  background-color: rgba(52, 199, 89, 0.1);
+  border: 1px solid rgba(52, 199, 89, 0.3);
+  color: #34c759;
+}
+
+.message-container.error {
+  background-color: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  color: #ff3b30;
+}
+
+.message-container.info {
+  background-color: rgba(0, 122, 255, 0.1);
+  border: 1px solid rgba(0, 122, 255, 0.3);
+  color: #007aff;
+}
+
+.sell-submit {
+  position: relative;
+  overflow: hidden;
+}
+
+.sell-submit.submitting {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.sell-submit.submitting::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .date-container {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sell-group.half {
+    width: 100%;
+  }
 }

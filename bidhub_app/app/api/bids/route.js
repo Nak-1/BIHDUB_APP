@@ -22,36 +22,47 @@ export async function POST(request) {
   try {
     await dbConnect();
     
-    const body = await request.json();
-    const { auctionId, userId, amount } = body;
+    const auctionData = await request.json();
     
-    const auction = await Auction.findOne({ id: auctionId });
+    const missingFields = [];
+    if (!auctionData.title) missingFields.push('title');
+    if (!auctionData.description) missingFields.push('description');
+    if (!auctionData.startingPrice && !auctionData.startPrice) missingFields.push('startingPrice/startPrice');
+    if (!auctionData.startDate) missingFields.push('startDate');
+    if (!auctionData.endDate) missingFields.push('endDate');
+    if (!auctionData.image) missingFields.push('image');
     
-    if (!auction) {
+    if (missingFields.length > 0) {
       return NextResponse.json(
-        { error: 'Auction not found' },
-        { status: 404 }
+        { error: `Missing required fields: ${missingFields.join(', ')}` },
+        { status: 400 }
       );
     }
     
-    auction.placeBid(userId, amount);
+    const newAuction = new Auction({
+      id: auctionData.id || Date.now(),
+      title: auctionData.title,
+      description: auctionData.description,
+      startingPrice: auctionData.startingPrice || auctionData.startPrice,
+      price: auctionData.price || auctionData.startingPrice || auctionData.startPrice,
+      startDate: auctionData.startDate,
+      endDate: auctionData.endDate,
+      image: auctionData.image,
+      author: auctionData.author || "Anonymous",
+      bids: auctionData.bids || []
+    });
     
-    await auction.save();
+    await newAuction.save();
     
     return NextResponse.json({ 
-      message: 'Bid placed successfully', 
-      bid: {
-        auctionId,
-        userId,
-        amount,
-        time: new Date()
-      }
+      message: 'Auction created successfully', 
+      auction: newAuction
     }, { status: 201 });
   } catch (error) {
-    console.error('Failed to process bid:', error);
+    console.error('Failed to create auction:', error);
     return NextResponse.json(
-      { error: error.message || 'Failed to process bid' },
-      { status: 400 }
+      { error: error.message || 'Failed to create auction' },
+      { status: 500 }
     );
   }
 }

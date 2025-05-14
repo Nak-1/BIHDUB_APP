@@ -1,33 +1,27 @@
-import auctionsData from '@/data/auctions.json';
+import dbConnect from '@/lib/mongodb';
+import Auction from '@/model/auction';
 import { NextResponse } from 'next/server';
 
 export async function GET(request, { params }) {
   try {
+    await dbConnect();
     
-    const { id } = await params;
-    const bidId = parseInt(id);
+    const { id } = params;
+    const auctionId = parseInt(id);
     
-    let targetBid = null;
+    const auction = await Auction.findOne({ id: auctionId });
     
-    for (const auction of auctionsData.auctions) {
-        if (auction.id === bidId) {
-          targetBid = auction;
-          break;
-        }
-      if (targetBid) break;
-    }
-    
-    if (!targetBid) {
+    if (!auction) {
       return NextResponse.json(
-        { error: 'Bid not found' },
+        { error: 'Auction not found' },
         { status: 404 }
       );
     }
     
-    return NextResponse.json(targetBid);
+    return NextResponse.json(auction);
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to fetch bid data' },
+      { error: 'Failed to fetch auction data' },
       { status: 500 }
     );
   }
@@ -35,17 +29,32 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   try {
-    const { id } = await params;
-    const bidId = parseInt(id);
-    const body = await request.json();
+    await dbConnect();
+    
+    const { id } = params;
+    const auctionId = parseInt(id);
+    const updateData = await request.json();
+    
+    const auction = await Auction.findOneAndUpdate(
+      { id: auctionId },
+      { $set: updateData },
+      { new: true }
+    );
+    
+    if (!auction) {
+      return NextResponse.json(
+        { error: 'Auction not found' },
+        { status: 404 }
+      );
+    }
     
     return NextResponse.json({ 
-      message: 'Bid updated successfully', 
-      bid: { id: bidId, ...body } 
+      message: 'Auction updated successfully', 
+      auction
     }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to update bid' },
+      { error: 'Failed to update auction' },
       { status: 400 }
     );
   }
@@ -53,15 +62,26 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
-    const { id } = await params;
-    const bidId = parseInt(id);
+    await dbConnect();
+    
+    const { id } = params;
+    const auctionId = parseInt(id);
+    
+    const result = await Auction.findOneAndDelete({ id: auctionId });
+    
+    if (!result) {
+      return NextResponse.json(
+        { error: 'Auction not found' },
+        { status: 404 }
+      );
+    }
     
     return NextResponse.json({ 
-        message: 'Bid deleted successfully'
+      message: 'Auction deleted successfully'
     }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { error: 'Failed to delete bid' },
+      { error: 'Failed to delete auction' },
       { status: 400 }
     );
   }
