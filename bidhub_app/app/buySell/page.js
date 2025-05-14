@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { FaBox, FaCreditCard, FaFileAlt, FaLink, FaShoppingBag } from "react-icons/fa";
 import section1 from "../../assests/section1.png";
 import "../../styles/BuySell.css";
-import { useRouter } from "next/navigation";
 
 export default function BuySell() {
   const router = useRouter();
@@ -29,8 +29,8 @@ export default function BuySell() {
               <p>
               Бид танд найдвартай дуудлага худалдаанд цахимаар оролцох болон өөрийн бараагаа дуудлага худалдаанд зарах боломжийг олгоно
               </p>
-              <button className="cta-button">Оролцох</button>
-              <button className="cta-button1" onClick={() => {router.push("/sell");}}>Үүсгэх</button>
+              <button className="cta-button" onClick={() => {router.push("/auctions")}}>Оролцох</button>
+              <button className="cta-button1" onClick={() => {router.push("/sell")}}>Үүсгэх</button>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@ export default function BuySell() {
           <p>
             <strong>Бүртгүүлэх мэдээллээ бөглөөд</strong> анхны худалдан авалтадаа 10% хөнгөлөлт авна
           </p>
-          <button className="register-button">Эхлэхийн тулд бүртгүүлнэ үү</button>
+          <button className="register-button" onClick={() => {router.push("/auth")}}>Эхлэхийн тулд бүртгүүлнэ үү</button>
         </div>
       </div>
     </section>

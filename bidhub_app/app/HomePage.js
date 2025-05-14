@@ -2,11 +2,13 @@
 
 import ItemCard from "@/components/ItemCard";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import section1 from "../assests/section1.png";
 import "../styles/HomePage.css";
 
 export default function HomePage() {
+  const router = useRouter();
   const [auctions, setAuctions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -48,8 +50,8 @@ export default function HomePage() {
           <p>Бид танд найдвартай дуудлага худалдаанд цахимаар оролцох болон өөрийн бараагаа дуудлага худалдаанд зарах
             боломжийг олгоно</p>
           <div className="section1-buttons">
-            <button className="btn-primary">Дуудлага худалдаанд оролцох</button>
-            <button className="btn-secondary">Дуудлага худалдаа үүсгэх</button>
+            <button className="btn-primary" onClick={() => {router.push("/auctions")}}>Дуудлага худалдаанд оролцох</button>
+            <button className="btn-secondary" onClick={() => {router.push("/sell")}}>Дуудлага худалдаа үүсгэх</button>
           </div>
         </div>
       </section>
