@@ -38,12 +38,22 @@ export default function ItemInfos() {
         const data = await response.json();
         setItem(data);
         
-        if (data.timeLeft && typeof data.timeLeft === 'string') {
-          const parts = data.timeLeft.split(' ');
-          if (parts.length >= 2 && parts[1].includes('day')) {
-            const days = parseInt(parts[0]);
-            setTimeLeft(prev => ({...prev, days}));
-            setIsAuctionActive(days > 0);
+        if (data.endDate) {
+          const endDateTime = new Date(data.endDate);
+          const currentTime = new Date();
+          const timeDiff = endDateTime - currentTime;
+          
+          if (timeDiff > 0) {
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            setTimeLeft({ days, hours, minutes, seconds });
+            setIsAuctionActive(true);
+          } else {
+            setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            setIsAuctionActive(false);
           }
         }
       } catch (err) {
@@ -83,38 +93,29 @@ export default function ItemInfos() {
   
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(prevTime => {
-        let { days, hours, minutes, seconds } = prevTime;
+      if (item && item.endDate) {
+        const endDateTime = new Date(item.endDate);
+        const currentTime = new Date();
+        const timeDiff = endDateTime - currentTime;
         
-        if (seconds > 0) {
-          seconds -= 1;
+        if (timeDiff > 0) {
+          const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+          
+          setTimeLeft({ days, hours, minutes, seconds });
         } else {
-          seconds = 59;
-          if (minutes > 0) {
-            minutes -= 1;
-          } else {
-            minutes = 59;
-            if (hours > 0) {
-              hours -= 1;
-            } else {
-              hours = 23;
-              if (days > 0) {
-                days -= 1;
-              } else {
-                clearInterval(timer);
-                setIsAuctionActive(false);
-                return prevTime;
-              }
-            }
-          }
+          setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+          setIsAuctionActive(false);
+          clearInterval(timer);
         }
-        
-        return { days, hours, minutes, seconds };
-      });
+      }
     }, 1000);
     
     return () => clearInterval(timer);
-  }, []);
+  }, [item]);
+  
 
   if (loading) return <div className="container">Loading item details...</div>;
   if (error) return <div className="container error-message">{error}</div>;

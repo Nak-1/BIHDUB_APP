@@ -3,10 +3,11 @@
 import ItemCard from "@/components/ItemCard";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import { socket } from "../../socket";
 import "../../styles/Auctions.css";
 
-let socket;
+// let socket;
 
 export default function Auctions() {
   const [activeTab, setActiveTab] = useState("all");
@@ -105,28 +106,34 @@ export default function Auctions() {
     router.push("/itemInfo");
   };
 
-  const [currentBid, setCurrentBid] = useState(0);
-  const [myBid, setMyBid] = useState('');
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [transport, setTransport] = useState("N/A");
 
   useEffect(() => {
-    if (!socket) {
-      fetch('/api/socket'); // Server-г эхлүүлнэ
-      socket = io();
+    if (socket.connected) {
+      onConnect();
+    }
 
-      socket.on('connect', () => {
-        console.log('Socket connected');
-      });
+    function onConnect() {
+      setIsConnected(true);
+      setTransport(socket.io.engine.transport.name);
 
-      socket.on('update_bid', (data) => {
-        setCurrentBid(data);
+      socket.io.engine.on("upgrade", (transport) => {
+        setTransport(transport.name);
       });
     }
 
+    function onDisconnect() {
+      setIsConnected(false);
+      setTransport("N/A");
+    }
+
+    socket.on("connect", onConnect);
+    socket.on("disconnect", onDisconnect);
+
     return () => {
-      if (socket) {
-        socket.disconnect();
-        socket = null;
-      }
+      socket.off("connect", onConnect);
+      socket.off("disconnect", onDisconnect);
     };
   }, []);
 
@@ -135,6 +142,8 @@ export default function Auctions() {
       <main>
         <section className="contact-header">
           <h1>Дуудлага худалдаа</h1>
+          <p>Status: { isConnected ? "connected" : "disconnected" }</p>
+          <p>Transport: { transport }</p>
         </section>
         <div className="loading-container">
           <p>Дуудлага худалдааны мэдээлэл ачаалж байна...</p>

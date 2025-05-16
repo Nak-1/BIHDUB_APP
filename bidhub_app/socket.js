@@ -1,6 +1,12 @@
+"use client";
+import { io } from "socket.io-client";
+
+export const socket = io();
+
 import { Server } from "socket.io";
 
 export default function handler(req, res) {
+
   if (res.socket.server.io) {
     console.log("Socket.io server already running");
   } else {
