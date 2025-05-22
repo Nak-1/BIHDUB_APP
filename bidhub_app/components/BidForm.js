@@ -28,10 +28,10 @@ export default function BidForm({ auctionId, currentPrice, isActive }) {
     setMessageType('info');
     
     try {
-      const userId = "user123";
+      const userId = "681ce0270163bd98b9c22d2c";
       
       const response = await fetch('/api/bids', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },

@@ -173,7 +173,7 @@ export default function ItemInfos() {
                   <tr key={index}>
                     <td>{bid.userId}</td>
                     <td>{bid.amount}₮</td>
-                    <td>{bid.time}</td>
+                    <td>{bid.timestamp}</td>
                   </tr>
                 ))
               ) : (

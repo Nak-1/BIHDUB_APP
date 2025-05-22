@@ -8,9 +8,9 @@ const SellerSchema = new mongoose.Schema({
 });
 
 const BidSchema = new mongoose.Schema({
-  userId: Number,
+  userId: mongoose.Schema.Types.ObjectId,
   amount: Number,
-  time: Date
+  timestamp: { type: Date, default: Date.now }
 });
 
 const AuctionSchema = new mongoose.Schema({

@@ -66,3 +66,56 @@ export async function POST(request) {
     );
   }
 }
+
+export async function PUT(request) {
+  try {
+    await dbConnect();
+    
+    const { auctionId, userId, amount } = await request.json();
+    
+    if (!auctionId || !userId || !amount) {
+      return NextResponse.json(
+        { error: 'Missing required fields: auctionId, userId, or amount' },
+        { status: 400 }
+      );
+    }
+    
+    const auction = await Auction.findOne({ id: auctionId });
+    
+    if (!auction) {
+      return NextResponse.json(
+        { error: 'Auction not found' },
+        { status: 404 }
+      );
+    }
+    
+    if (!auction.isActive()) {
+      return NextResponse.json(
+        { error: 'Auction has ended' },
+        { status: 400 }
+      );
+    }
+    
+    try {
+      auction.placeBid(userId, amount);
+      await auction.save();
+      
+      return NextResponse.json({
+        message: 'Bid placed successfully',
+        currentPrice: auction.price,
+        bidCount: auction.currentBids
+      }, { status: 201 });
+    } catch (bidError) {
+      return NextResponse.json(
+        { error: bidError.message },
+        { status: 400 }
+      );
+    }
+  } catch (error) {
+    console.error('Error placing bid:', error);
+    return NextResponse.json(
+      { error: 'Failed to place bid' },
+      { status: 500 }
+    );
+  }
+}
