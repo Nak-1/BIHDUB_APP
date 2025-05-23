@@ -21,7 +21,7 @@ export default function ItemCard({ item }) {
       <div className="auction-details">
         <h3 className="auction-title">{item.title}</h3>
         <div className="auction-price">₮ {item.price.toLocaleString()}</div>
-        <div className="auction-time">Дуусах хугацаа: {item.timeLeft}</div>
+        <div className="auction-time">Дуусах хугацаа: {new Date(item.endDate).toLocaleString()}</div>
         <button className="bid-button" onClick={() => navigateToItemInfo(item.id)}>Дуудлага өгөх</button>
       </div>
     </div>

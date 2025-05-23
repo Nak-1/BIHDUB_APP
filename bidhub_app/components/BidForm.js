@@ -13,6 +13,11 @@ export default function BidForm({ auctionId, currentPrice, isActive }) {
   const [displayPrice, setDisplayPrice] = useState(currentPrice);
   
   useEffect(() => {
+    setBidAmount(currentPrice);
+    setDisplayPrice(currentPrice);
+  }, [currentPrice]);
+  
+  useEffect(() => {
     socket.emit("join_auction", auctionId);
     
     socket.on("bid_update", (bidData) => {
