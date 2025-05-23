@@ -188,8 +188,7 @@ export default function ItemInfos() {
                 currentPrice={item.price} 
                 isActive={isAuctionActive} 
               />
-              
-              <p className="interest">👁 {item.views || 10} хэрэглэгч сонирхож байна</p>
+              <p className="interest">👁 {item.__v || 0} хэрэглэгч сонирхож байна</p>
             </div>
           </div>
 
