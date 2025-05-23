@@ -40,7 +40,6 @@ export default function ItemInfos() {
         const data = await response.json();
         setItem(data);
         
-        // Set bid history if available
         if (data.bidHistory && Array.isArray(data.bidHistory)) {
           setBidHistory(data.bidHistory);
         }
