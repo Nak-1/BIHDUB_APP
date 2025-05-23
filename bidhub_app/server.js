@@ -15,7 +15,21 @@ app.prepare().then(() => {
   const io = new Server(httpServer);
 
   io.on("connection", (socket) => {
-    // ...
+    console.log(`User connected: ${socket.id}`);
+    
+    socket.on("join_auction", (auctionId) => {
+      socket.join(`auction_${auctionId}`);
+      console.log(`User ${socket.id} joined auction ${auctionId}`);
+    });
+    
+    socket.on("new_bid", (bidData) => {
+      console.log("New bid received:", bidData);
+      io.to(`auction_${bidData.auctionId}`).emit("bid_update", bidData);
+    });
+    
+    socket.on("disconnect", () => {
+      console.log(`User disconnected: ${socket.id}`);
+    });
   });
 
   httpServer

@@ -2,6 +2,7 @@
 
 import BidForm from "@/components/BidForm";
 import ItemCard from "@/components/ItemCard";
+import { socket } from '@/socket'; // Import the socket
 import "@/styles/HomePage.css";
 import "@/styles/ItemInfo.css";
 import Image from "next/image";
@@ -24,6 +25,7 @@ export default function ItemInfos() {
   const [error, setError] = useState(null);
   const [relatedAuctions, setRelatedAuctions] = useState([]);
   const [isAuctionActive, setIsAuctionActive] = useState(true);
+  const [bidHistory, setBidHistory] = useState([]);
   
   useEffect(() => {
     async function fetchItemData() {
@@ -37,6 +39,11 @@ export default function ItemInfos() {
         
         const data = await response.json();
         setItem(data);
+        
+        // Set bid history if available
+        if (data.bidHistory && Array.isArray(data.bidHistory)) {
+          setBidHistory(data.bidHistory);
+        }
         
         if (data.endDate) {
           const endDateTime = new Date(data.endDate);
@@ -90,6 +97,33 @@ export default function ItemInfos() {
       fetchRelatedAuctions();
     }
   }, [itemId]);
+  
+  useEffect(() => {
+    socket.emit("join_auction", itemId);
+    
+    socket.on("bid_update", (bidData) => {
+      if (bidData.auctionId === itemId) {
+        if (item) {
+          setItem(prevItem => ({
+            ...prevItem,
+            price: bidData.amount
+          }));
+        }
+        
+        const newBid = {
+          userId: bidData.userId,
+          amount: bidData.amount,
+          timestamp: bidData.timestamp || new Date().toISOString()
+        };
+        
+        setBidHistory(prevHistory => [newBid, ...prevHistory]);
+      }
+    });
+    
+    return () => {
+      socket.off("bid_update");
+    };
+  }, [itemId, item]);
   
   useEffect(() => {
     const timer = setInterval(() => {
@@ -161,19 +195,21 @@ export default function ItemInfos() {
           </div>
 
           <h2>Тендер</h2>
-          <table>
+          <table className="bid-history-table">
             <tbody>
               <tr>
                 <th>Тендер оролцогч</th>
                 <th>Дуудсан үнэ</th>
                 <th>Цаг</th>
               </tr>
-              {item.bidHistory && item.bidHistory.length > 0 ? (
-                item.bidHistory.map((bid, index) => (
+              {bidHistory && bidHistory.length > 0 ? (
+                bidHistory.map((bid, index) => (
                   <tr key={index}>
-                    <td>{bid.userId}</td>
+                    <td>{typeof bid.userId === 'string' && bid.userId.length > 8 
+                        ? `Хэрэглэгч #${bid.userId.substring(0, 8)}...` 
+                        : bid.userId}</td>
                     <td>{bid.amount}₮</td>
-                    <td>{bid.timestamp}</td>
+                    <td>{new Date(bid.timestamp).toLocaleString()}</td>
                   </tr>
                 ))
               ) : (
